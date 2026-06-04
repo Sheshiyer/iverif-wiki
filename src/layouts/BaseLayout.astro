@@ -4,6 +4,7 @@ import ThemeToggle from '../components/ThemeToggle.astro';
 import LanguageToggle from '../components/LanguageToggle.astro';
 import siteData from '../data/site-data.json';
 import type { Locale } from '../i18n';
+import { localizedPath } from '../i18n';
 import '../styles/global.css';
 
 interface Props {
@@ -77,6 +78,11 @@ const ogImage = siteData.heroImage || '/assets/website/og-image.png';
     <div class="ambient ambient--signal"></div>
 
     <div class="portal-shell">
+      <div class="mobile-header">
+        <a href={localizedPath(locale, '/')} class="mobile-brand">iV</a>
+        <button id="nav-toggle" class="mobile-nav-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+      </div>
+
       <aside class="sidebar-frame" aria-label="Main navigation">
         <div class="sidebar-frame__topbar">
           <LanguageToggle locale={locale} pathname={pathname} />
@@ -90,5 +96,28 @@ const ogImage = siteData.heroImage || '/assets/website/og-image.png';
     </div>
 
     <ThemeToggle />
+
+    <script is:inline>
+      (function() {
+        const toggle = document.getElementById('nav-toggle');
+        const sidebar = document.querySelector('.sidebar-frame');
+        if (!toggle || !sidebar) return;
+
+        toggle.addEventListener('click', () => {
+          const isOpen = sidebar.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          toggle.textContent = isOpen ? 'Close' : 'Menu';
+        });
+
+        // Close on nav link click (mobile)
+        sidebar.addEventListener('click', (e) => {
+          if (e.target.closest('a') && window.innerWidth <= 1024) {
+            sidebar.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.textContent = 'Menu';
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

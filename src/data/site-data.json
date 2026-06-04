@@ -10,8 +10,8 @@
   "heroPrimaryHref": "/docs/product/overview",
   "heroSecondaryHref": "/docs/research/notebooklm-artifacts",
   "docsHomeHref": "/docs/index",
-  "heroImage": "",
-  "heroImageAlt": "",
+  "heroImage": "/assets/website/pitch-hero.png",
+  "heroImageAlt": "iverif.io pitch hero visual",
   "metrics": [
     {
       "label": "Brandmint outputs",
@@ -19,15 +19,15 @@
     },
     {
       "label": "Visual assets",
-      "value": "0"
+      "value": "16"
     },
     {
       "label": "NotebookLM artifacts",
-      "value": "0"
+      "value": "24"
     },
     {
       "label": "Reports surfaced",
-      "value": "0"
+      "value": "3"
     }
   ],
   "launchFacts": [
@@ -84,8 +84,64 @@
       "eyebrow": "Research"
     }
   ],
-  "visualHighlights": [],
-  "notebooklmHighlights": [],
+  "visualHighlights": [
+    {
+      "image": "/assets/generated/2A-brand-kit-bento-nanobananapro-v1.png",
+      "title": "Brand Kit Bento",
+      "eyebrow": "Visual Identity",
+      "description": "The foundational bento grid establishing precision, signal green accents, and regulatory stone grounding.",
+      "href": "/docs/brand/visual-assets"
+    },
+    {
+      "image": "/assets/generated/2B-brand-seal-flux2pro-v1.png",
+      "title": "Official Brand Seal",
+      "eyebrow": "Logo System",
+      "description": "Document icon with integrated validation checkmark — the mark of trusted regulatory AI.",
+      "href": "/docs/brand/visual-assets"
+    },
+    {
+      "image": "/assets/generated/PITCH-HERO-pitch_hero-nanobananapro-v1.png",
+      "title": "Pitch Deck Hero",
+      "eyebrow": "Campaign",
+      "description": "Hero visual for investor decks and landing — clean, authoritative, action-ready.",
+      "href": "/docs/brand/visual-assets"
+    },
+    {
+      "image": "/assets/generated/OG-IMAGE-og_image-nanobananapro-v1.png",
+      "title": "Open Graph Asset",
+      "eyebrow": "Social",
+      "description": "Social sharing preview optimized for LinkedIn, X, and Facebook distribution.",
+      "href": "/docs/brand/visual-assets"
+    }
+  ],
+  "notebooklmHighlights": [
+    {
+      "image": "/notebooklm/infographic-landscape.png",
+      "kind": "Infographic",
+      "title": "Brand Strategy Overview",
+      "description": "High-level mapping of iverif.io positioning, trust signals, and regulatory differentiation.",
+      "href": "/docs/research/notebooklm-artifacts"
+    },
+    {
+      "image": "/notebooklm/infographic-portrait.png",
+      "kind": "Infographic",
+      "title": "Regulatory Compliance Flow",
+      "description": "Visual breakdown of the document validation pipeline and audit trail generation.",
+      "href": "/docs/research/notebooklm-artifacts"
+    },
+    {
+      "kind": "Audio",
+      "title": "Deep Dive Audio Overview",
+      "description": "80-minute synthesized discussion of the brand, value prop, and EU energy subsidy operator workflows.",
+      "href": "/docs/research/notebooklm-artifacts"
+    },
+    {
+      "kind": "Deck",
+      "title": "Validation Engine Presentation",
+      "description": "Focused deck on the AI document validation engine, pre-configured rules, and complete audit trails.",
+      "href": "/docs/research/notebooklm-artifacts"
+    }
+  ],
   "publishedAtHuman": "June 03, 2026 at 10:28 PM",
   "runLabel": "Latest iverif launch build",
   "palette": {
@@ -117,7 +173,7 @@
   },
   "typography": {
     "header": {
-      "font": "Geist Sans",
+      "font": "IBM Plex Sans",
       "weights": [
         "Light",
         "Regular",
@@ -128,14 +184,14 @@
       "case": "title case"
     },
     "body": {
-      "font": "Geist Sans",
+      "font": "IBM Plex Sans",
       "weights": [
         "Regular",
         "Medium"
       ]
     },
     "data": {
-      "font": "Geist Mono",
+      "font": "IBM Plex Mono",
       "weights": [
         "Regular",
         "Medium"

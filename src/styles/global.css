@@ -1345,3 +1345,51 @@ body::selection {
 [data-theme='dark'] .theme-toggle__label--dark {
   display: inline;
 }
+
+/* Mobile header and nav toggle (Swiss, restrained) */
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  background: var(--surface-canvas);
+  border-bottom: 1px solid var(--surface-border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.mobile-brand {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+}
+
+.mobile-nav-toggle {
+  padding: 0.5rem 0.875rem;
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xs);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-body);
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@media (max-width: 1024px) {
+  .mobile-header {
+    display: flex;
+  }
+
+  .sidebar-frame {
+    display: none;
+  }
+
+  .sidebar-frame.open {
+    display: block;
+    position: relative;
+    z-index: 15;
+  }
+}

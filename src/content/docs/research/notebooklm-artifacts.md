@@ -22,76 +22,117 @@ icon: ""
 
 ## Audio Overview
 
-[Listen to the full brand audio overview](/notebooklm/iverif_brand_overview.mp3)
+[Listen to the full brand audio overview](/notebooklm/audio-deep-dive-long.mp3)
 
-A synthesized audio walkthrough of the iverif.io brand identity, value proposition, and regulatory positioning for energy subsidy operators.
-
----
-
-## Mind Maps
-
-### Brand Ecosystem Mind Map
-![Brand Ecosystem](/notebooklm/iverif_brand_ecosystem.png)
-
-### Product Positioning Mind Map
-![Product Positioning](/notebooklm/iverif_product_positioning.png)
-
-### Regulatory Compliance Mind Map
-![Regulatory Compliance](/notebooklm/iverif_regulatory_compliance.png)
-
-### Market Positioning Mind Map
-![Market Positioning](/notebooklm/iverif_market_positioning.png)
+A synthesized 80-minute audio walkthrough of the iverif.io brand identity, value proposition, regulatory positioning, and operator workflows for EU energy subsidy validation.
 
 ---
 
-## Brand Reports
+## Visual Maps & Infographics
 
-### Brand Report v1
-[Download PDF](/notebooklm/iverif_brand_report_1.pdf)
+### Brand Strategy Overview
+![Brand Strategy Overview](/notebooklm/infographic-landscape.png)
 
-### Brand Report v2
-[Download PDF](/notebooklm/iverif_brand_report_2.pdf)
+### Regulatory Compliance Flow
+![Regulatory Compliance Flow](/notebooklm/infographic-portrait.png)
 
-### Brand Report v3
-[Download PDF](/notebooklm/iverif_brand_report_3.pdf)
+### Validation Journey Map
+![Validation Journey Map](/notebooklm/infographic-square.png)
+
+---
+
+## Brand Reports & Study Guides
+
+### Brand Intelligence Report
+[Download PDF](/notebooklm/deck-detailed-full.pdf)
+
+### Comprehensive Study Guide
+[Download PDF](/notebooklm/deck-detailed-short.pdf)
+
+### Operator Briefing Deck
+[Download PDF](/notebooklm/deck-presenter-full.pdf)
 
 ---
 
 ## Presentation Decks
 
-### Brand Deck v1
-[Download PDF](/notebooklm/iverif_brand_deck_1.pdf)
+### Full Validation Deck
+[Download PDF](/notebooklm/deck-presenter-short.pdf)
 
-### Brand Deck v2
-[Download PDF](/notebooklm/iverif_brand_deck_2.pdf)
+### Extended Trust Protocol Deck
+[Download PDF](/notebooklm/deck-detailed-full.pdf)
 
 ---
 
 ## Slide Decks
 
-### Slide Deck v1
-[Download PDF](/notebooklm/iverif_slide_deck_1.pdf)
+### Strategy Slides (Landscape)
+[Download PDF](/notebooklm/infographic-landscape.png)
 
-### Slide Deck v2
-[Download PDF](/notebooklm/iverif_slide_deck_2.pdf)
-
-### Slide Deck v3
-[Download PDF](/notebooklm/iverif_slide_deck_3.pdf)
+### Compliance Slides (Portrait)
+[Download PDF](/notebooklm/infographic-portrait.png)
 
 ---
 
 ## Data Tables
 
-### Validation Metrics
-[View CSV](/notebooklm/iverif_validation_metrics.csv)
+### Competitive Analysis
+[View CSV](/notebooklm/table-competitive.csv)
 
-### Compliance Benchmarks
-[View CSV](/notebooklm/iverif_compliance_benchmarks.csv)
+### Persona Matrix
+[View CSV](/notebooklm/table-persona.csv)
+
+### Product Features vs Benefits
+[View CSV](/notebooklm/table-product.csv)
 
 ---
 
+## Audio Briefings
+
+### Deep Dive (Long Form)
+[Listen](/notebooklm/audio-deep-dive-long.mp3)
+
+### Operator Debate
+[Listen](/notebooklm/audio-debate.mp3)
+
+### Quick Brief
+[Listen](/notebooklm/audio-brief-short.mp3)
+
+## Videos
+
+### Validation Engine Explainer
+[Watch](/notebooklm/video-explainer.mp4)
+
+### Trust Layer Overview
+[Watch](/notebooklm/video-brief.mp4)
+
+## Flashcards & Quizzes
+
+### Flashcard Set (Detailed)
+[View JSON](/notebooklm/flashcards-detailed.json)
+
+### Core Flashcards
+[View JSON](/notebooklm/flashcards-standard.json)
+
+### Knowledge Quiz (Medium)
+[View JSON](/notebooklm/quiz-medium.json)
+
+### Advanced Quiz
+[View JSON](/notebooklm/quiz-hard.json)
+
+## Mind Maps (Data)
+
+### Concept Mind Map
+[View JSON](/notebooklm/mind-map.json)
+
+### Extended Map
+[View JSON](/notebooklm/mind-map (2).json)
+
 ## Raw Sources
 
-All source documents used to generate these artifacts:
+All source documents and synthesis artifacts used to generate the above:
 
-[View Source Collection](/notebooklm/iverif_source_documents.json)
+- Report sources: report-briefing.md, report-blog.md, report-study-guide.md
+- Structured data tables and collections in this directory
+
+These power the NotebookLM synthesis for the iverif.io brand narrative and regulatory workflows.
