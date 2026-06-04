@@ -13,7 +13,7 @@ sources:
 - launch-email-sequence.json
 lastUpdated: '2026-06-03'
 order: 2
-icon: ✉️
+icon: ""
 ---
 
 # Email Templates

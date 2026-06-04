@@ -9,7 +9,7 @@ tags:
 sources: []
 lastUpdated: '2026-06-04'
 order: 3
-icon: 📐
+icon: ""
 ---
 
 # Technical Specifications

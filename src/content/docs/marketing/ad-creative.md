@@ -12,7 +12,7 @@ sources:
 - live-campaign-ads.json
 lastUpdated: '2026-06-03'
 order: 5
-icon: 🎯
+icon: ""
 ---
 
 # Ad Creative

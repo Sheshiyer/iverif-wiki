@@ -11,9 +11,10 @@ interface Props {
   category?: string;
   headings?: { depth: number; slug: string; text: string }[];
   locale: Locale;
+  lastUpdated?: string;
 }
 
-const { title, description, category, headings = [], locale } = Astro.props;
+const { title, description, category, headings = [], locale, lastUpdated } = Astro.props;
 const copy = t(locale);
 const content = await Astro.slots.render('default');
 const wordCount = content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
@@ -30,12 +31,13 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
           <div class="doc-header__meta">
             {category && <span class="pill pill--soft">{category}</span>}
             <span class="pill pill--warm">{readingTime} {copy.shell.minRead}</span>
+            {lastUpdated && <span class="pill pill--soft">Updated {lastUpdated}</span>}
           </div>
           <h1>{title}</h1>
           {description && <p class="doc-description">{description}</p>}
         </header>
 
-        <div class="prose portal-prose">
+        <div class="prose portal-prose" id="doc-content">
           <slot />
         </div>
       </article>
@@ -47,4 +49,48 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
       )}
     </div>
   </section>
+
+  <script is:inline>
+    (function() {
+      // Wrap tables for horizontal scrolling
+      document.querySelectorAll('.portal-prose table').forEach(function(table) {
+        if (!table.parentElement.classList.contains('table-wrapper')) {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'table-wrapper';
+          table.parentNode.insertBefore(wrapper, table);
+          wrapper.appendChild(table);
+        }
+      });
+
+      // Add copy buttons to code blocks
+      document.querySelectorAll('.portal-prose pre').forEach(function(pre) {
+        if (pre.parentElement.classList.contains('code-block-wrapper')) return;
+        
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+        
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+        
+        button.addEventListener('click', function() {
+          const code = pre.querySelector('code');
+          const text = code ? code.textContent : pre.textContent;
+          navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied';
+            button.classList.add('copied');
+            setTimeout(function() {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          });
+        });
+        
+        wrapper.appendChild(button);
+      });
+    })();
+  </script>
 </BaseLayout>

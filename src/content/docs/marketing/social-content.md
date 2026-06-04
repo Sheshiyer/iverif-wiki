@@ -12,7 +12,7 @@ sources:
 - influencer-outreach-pro.json
 lastUpdated: '2026-06-03'
 order: 3
-icon: 📣
+icon: ""
 ---
 
 # Social Content

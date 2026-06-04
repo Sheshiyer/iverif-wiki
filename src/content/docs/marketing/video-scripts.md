@@ -11,7 +11,7 @@ sources:
 - campaign-video-script.json
 lastUpdated: '2026-06-03'
 order: 4
-icon: 🎬
+icon: ""
 ---
 
 # Video Scripts

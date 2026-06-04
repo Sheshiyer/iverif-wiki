@@ -10,9 +10,10 @@ interface Props {
   title: string;
   description?: string;
   locale: Locale;
+  slug?: string;
 }
 
-const { title, description, locale } = Astro.props;
+const { title, description, locale, slug } = Astro.props;
 const palette = siteData.palette || {};
 const brandVars = {
   '--brand-primary': palette.primary?.hex || '#AA98D6',
@@ -25,6 +26,8 @@ const brandVars = {
 };
 const defaultTheme = siteData.defaultTheme || 'light';
 const pathname = Astro.url.pathname;
+const canonicalUrl = `https://iverif-wiki-deploy.vercel.app${pathname}`;
+const ogImage = siteData.heroImage || '/assets/website/og-image.png';
 ---
 
 <!DOCTYPE html>
@@ -33,7 +36,33 @@ const pathname = Astro.url.pathname;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <link rel="canonical" href={canonicalUrl} />
+    
     {description && <meta name="description" content={description} />}
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={siteData.brandName} />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImage} />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": siteData.brandName,
+      "description": siteData.tagline,
+      "url": "https://iverif-wiki-deploy.vercel.app",
+      "logo": "https://iverif-wiki-deploy.vercel.app/assets/website/favicon.png"
+    })} />
+    
     <script is:inline>
       const savedTheme = localStorage.getItem('theme');
       const preferred = savedTheme || document.documentElement.dataset.theme || 'light';
@@ -41,19 +70,21 @@ const pathname = Astro.url.pathname;
     </script>
   </head>
   <body style={brandVars}>
+    <a href="#content" class="skip-link">Skip to content</a>
+    
     <div class="ambient ambient--primary"></div>
     <div class="ambient ambient--accent"></div>
     <div class="ambient ambient--signal"></div>
 
     <div class="portal-shell">
-      <aside class="sidebar-frame">
+      <aside class="sidebar-frame" aria-label="Main navigation">
         <div class="sidebar-frame__topbar">
           <LanguageToggle locale={locale} pathname={pathname} />
         </div>
-        <Navigation locale={locale} />
+        <Navigation locale={locale} currentPath={pathname} />
       </aside>
 
-      <main class="content-frame">
+      <main id="content" class="content-frame" tabindex="-1">
         <slot />
       </main>
     </div>

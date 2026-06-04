@@ -10,7 +10,7 @@ tags:
 sources: []
 lastUpdated: '2026-06-04'
 order: 2
-icon: 🚀
+icon: ""
 ---
 
 # Quickstart

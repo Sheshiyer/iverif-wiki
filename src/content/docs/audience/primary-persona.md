@@ -9,7 +9,7 @@ tags:
 sources: []
 lastUpdated: '2026-06-04'
 order: 1
-icon: 👤
+icon: ""
 ---
 
 # Primary Persona: The Energy Subsidy Operator
