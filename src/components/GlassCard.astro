@@ -14,14 +14,15 @@ const {
 } = Astro.props;
 
 const Tag = href ? 'a' : 'div';
+const useSwiss = tone === 'default';
 ---
 
 <Tag
   href={href}
   class:list={[
-    'glass-card',
-    `glass-card--${tone}`,
-    { 'glass-card--interactive': interactive || Boolean(href) },
+    useSwiss ? 'swiss-panel' : 'glass-card',
+    !useSwiss && `glass-card--${tone}`,
+    { 'glass-card--interactive': !useSwiss && (interactive || Boolean(href)) },
     className,
   ]}
 >

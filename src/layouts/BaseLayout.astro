@@ -16,14 +16,15 @@ interface Props {
 
 const { title, description, locale, slug } = Astro.props;
 const palette = siteData.palette || {};
+const typo = siteData.typography || {};
 const brandVars = {
-  '--brand-primary': palette.primary?.hex || '#AA98D6',
-  '--brand-secondary': palette.secondary?.hex || '#F8F6F2',
-  '--brand-accent': palette.accent?.hex || '#E67A2E',
-  '--brand-support': palette.support?.hex || '#D9D3C1',
-  '--brand-signal': palette.signal?.hex || '#4CC8B2',
-  '--font-display': siteData.typography?.header?.font || 'Figtree',
-  '--font-body': siteData.typography?.body?.font || 'Inter',
+  '--brand-primary': palette.primary?.hex || '#2EE600',
+  '--brand-secondary': palette.secondary?.hex || '#1C1917',
+  '--brand-accent': palette.accent?.hex || '#FAFAF9',
+  '--brand-support': palette.support?.hex || '#78716C',
+  '--brand-signal': palette.signal?.hex || '#F59E0B',
+  '--font-display': typo.header?.font || 'IBM Plex Sans',
+  '--font-body': typo.body?.font || 'IBM Plex Sans',
 };
 const defaultTheme = siteData.defaultTheme || 'light';
 const pathname = Astro.url.pathname;
@@ -72,10 +73,6 @@ const ogImage = siteData.heroImage || '/assets/website/og-image.png';
   </head>
   <body style={brandVars}>
     <a href="#content" class="skip-link">Skip to content</a>
-    
-    <div class="ambient ambient--primary"></div>
-    <div class="ambient ambient--accent"></div>
-    <div class="ambient ambient--signal"></div>
 
     <div class="portal-shell">
       <div class="mobile-header">

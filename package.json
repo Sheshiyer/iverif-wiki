@@ -11,7 +11,8 @@
     "verify:routes": "node scripts/smoke-routes.mjs"
   },
   "dependencies": {
+    "@astrojs/mdx": "^4.0.0",
     "astro": "^5.0.0",
-    "@astrojs/mdx": "^4.0.0"
+    "gsap": "^3.15.0"
   }
 }

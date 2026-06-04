@@ -1,0 +1,242 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { LOCALES, normalizeLocale, localizedPath, t } from '../../../../i18n';
+
+export async function getStaticPaths() {
+  return LOCALES.map((locale) => ({ params: { locale } }));
+}
+
+const locale = normalizeLocale(Astro.params.locale);
+const copy = t(locale);
+
+// Real files only from public/assets/generated and /website
+const visualAssets = [
+  // Brand Identity
+  { file: '/assets/generated/2A-brand-kit-bento-nanobananapro-v1.png', cat: 'Brand Identity', title: 'Brand Kit Bento Grid (v1)', desc: 'Foundational bento establishing precision, signal green, regulatory stone.' },
+  { file: '/assets/generated/2A-brand-kit-bento-nanobananapro-v137.png', cat: 'Brand Identity', title: 'Brand Kit Bento Grid (v137)', desc: 'Refined iteration of the core brand bento system.' },
+  { file: '/assets/generated/2B-brand-seal-flux2pro-v1.png', cat: 'Brand Identity', title: 'Brand Seal (v1)', desc: 'Document icon with integrated validation checkmark — the mark of trusted AI.' },
+  { file: '/assets/generated/2B-brand-seal-flux2pro-v137.png', cat: 'Brand Identity', title: 'Brand Seal (v137)', desc: 'Polished seal variant for premium applications.' },
+  { file: '/assets/generated/2C-logo-emboss-flux2pro-v1.png', cat: 'Brand Identity', title: 'Logo Emboss (v1)', desc: 'Dimensional emboss treatment for depth and authority.' },
+  { file: '/assets/generated/2C-logo-emboss-flux2pro-v137.png', cat: 'Brand Identity', title: 'Logo Emboss (v137)', desc: 'Enhanced emboss with refined lighting.' },
+  // App & Web
+  { file: '/assets/generated/APP-ICON-app_icon-flux2pro-v1.png', cat: 'App & Web', title: 'App Icon (v1)', desc: 'iOS/Android/favicon app icon.' },
+  { file: '/assets/generated/APP-ICON-app_icon-flux2pro-v137.png', cat: 'App & Web', title: 'App Icon (v137)', desc: 'Refined app icon variant.' },
+  { file: '/assets/generated/OG-IMAGE-og_image-nanobananapro-v1.png', cat: 'App & Web', title: 'OG Image (v1)', desc: 'Social sharing preview 1200×630.' },
+  { file: '/assets/generated/OG-IMAGE-og_image-nanobananapro-v137.png', cat: 'App & Web', title: 'OG Image (v137)', desc: 'Updated OG for LinkedIn/X/FB.' },
+  { file: '/assets/generated/TWITTER-HEADER-twitter_header-nanobananapro-v1.png', cat: 'App & Web', title: 'Twitter/X Header (v1)', desc: 'Profile banner 1500×500.' },
+  { file: '/assets/generated/TWITTER-HEADER-twitter_header-nanobananapro-v137.png', cat: 'App & Web', title: 'Twitter/X Header (v137)', desc: 'Refined header banner.' },
+  { file: '/assets/generated/PITCH-HERO-pitch_hero-nanobananapro-v1.png', cat: 'App & Web', title: 'Pitch Deck Hero (v1)', desc: 'Investor deck hero 1920×1080.' },
+  { file: '/assets/generated/PITCH-HERO-pitch_hero-nanobananapro-v137.png', cat: 'App & Web', title: 'Pitch Deck Hero (v137)', desc: 'Updated pitch hero visual.' },
+  // Campaign
+  { file: '/assets/generated/EMAIL-HERO-email_hero-nanobananapro-v1.png', cat: 'Campaign', title: 'Email Hero (v1)', desc: 'Email campaign header image.' },
+  { file: '/assets/generated/EMAIL-HERO-email_hero-nanobananapro-v137.png', cat: 'Campaign', title: 'Email Hero (v137)', desc: 'Refined email hero.' },
+  // Website curated
+  { file: '/assets/website/og-image.png', cat: 'Website Curated', title: 'Website OG Image', desc: 'Production-ready 1200×630 for iverif.fr' },
+  { file: '/assets/website/twitter-header.png', cat: 'Website Curated', title: 'Website Twitter Header', desc: 'Production 1500×500 banner.' },
+  { file: '/assets/website/pitch-hero.png', cat: 'Website Curated', title: 'Website Pitch Hero', desc: 'Curated hero for decks and site.' },
+  { file: '/assets/website/favicon.png', cat: 'Website Curated', title: 'Favicon', desc: '512×512 production favicon.' },
+];
+
+const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
+---
+
+<BaseLayout 
+  title="Visual Assets Library — iverif.io" 
+  description="Complete gallery of AI-generated brand assets: bento systems, seals, icons, OG images, pitch heroes, email assets, and production website files." 
+  locale={locale}
+>
+  <div class="doc-stage">
+    <div class="doc-shell" style="max-width: 1200px;">
+      <article class="doc-panel swiss-panel" style="padding: var(--space-5);">
+        <header class="doc-header">
+          <div class="doc-header__meta">
+            <span class="pill pill--soft">Brand</span>
+            <span class="pill pill--warm">{visualAssets.length} assets</span>
+          </div>
+          <h1>Visual Assets Library</h1>
+          <p class="doc-description" style="max-width: 60ch;">
+            All generated and curated visuals for iverif.io. Strict Swiss system: one accent (Signal Green), stone palette, IBM Plex Sans, 8px grid. Click any for full view and comparison.
+          </p>
+        </header>
+
+        <!-- Category filters -->
+        <div class="artifact-filters" id="va-filters">
+          <button class="artifact-filter is-active" data-cat="all">All</button>
+          {cats.map(c => (
+            <button class="artifact-filter" data-cat={c}>{c}</button>
+          ))}
+        </div>
+
+        <!-- Rich Swiss Gallery -->
+        <div class="visual-gallery swiss-grid-4" id="va-gallery" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+          {visualAssets.map((a, idx) => (
+            <div class="swiss-panel visual-asset-card" data-cat={a.cat} data-idx={idx}>
+              <img src={a.file} alt={a.title} loading="lazy" style="width:100%; aspect-ratio: 16/10; object-fit:cover; border-radius:2px; border:1px solid var(--surface-border);" />
+              <div class="panel-body">
+                <p class="panel-eyebrow">{a.cat}</p>
+                <h3 style="font-size:0.9375rem;margin:4px 0 2px;">{a.title}</h3>
+                <p style="font-size:0.75rem;line-height:1.4;margin:0 0 8px;">{a.desc}</p>
+                <div style="display:flex;gap:0.5rem;">
+                  <a href={a.file} target="_blank" class="feature-link" style="font-size:0.75rem">Download</a>
+                  <button class="feature-link" style="font-size:0.75rem;background:none;border:none;padding:0;cursor:pointer" data-va-view={idx}>View</button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style="margin-top:var(--space-5);font-size:0.75rem;color:var(--text-muted);max-width:60ch;">
+          All files real from <code>/assets/generated/</code> and <code>/assets/website/</code>. Generated via Brandmint + GPT Image 2 / Flux. No invented assets.
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Visual Asset Modal (full view + variant compare) -->
+  <div id="va-modal" class="artifact-modal" aria-hidden="true">
+    <div class="artifact-modal__content" role="dialog" aria-modal="true" style="max-width:1100px;">
+      <button class="artifact-modal__close" id="va-modal-close" aria-label="Close">×</button>
+      <div id="va-modal-body"></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  (function() {
+    const filters = document.getElementById('va-filters');
+    const gallery = document.getElementById('va-gallery');
+    const modal = document.getElementById('va-modal');
+    const modalBody = document.getElementById('va-modal-body');
+    const closeBtn = document.getElementById('va-modal-close');
+
+    const cards = Array.from(gallery.querySelectorAll('.visual-asset-card'));
+
+    // Filter
+    filters.addEventListener('click', (e) => {
+      const btn = e.target.closest('.artifact-filter');
+      if (!btn) return;
+      const cat = btn.dataset.cat;
+      filters.querySelectorAll('.artifact-filter').forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      cards.forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? '' : 'none';
+      });
+    });
+
+    // GSAP ScrollTrigger on this page for the visual grid (tasteful, reduced-motion safe)
+    let ctx;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function initGSAP() {
+      if (ctx) ctx.revert();
+      if (reduceMotion.matches) return;
+      ctx = gsap.context(() => {
+        gsap.fromTo('.visual-asset-card', 
+          { opacity: 0, y: 20 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.5, 
+            ease: 'power2.out', 
+            stagger: 0.04,
+            scrollTrigger: {
+              trigger: '#va-gallery',
+              start: 'top 80%',
+              once: true,
+            }
+          }
+        );
+      });
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    }
+
+    function cleanupGSAP() {
+      ScrollTrigger.getAll().forEach(t => t.kill());
+      ctx?.revert?.();
+    }
+
+    document.addEventListener('astro:page-load', initGSAP);
+    document.addEventListener('astro:before-swap', cleanupGSAP);
+    if (document.readyState !== 'loading') initGSAP();
+
+    // Modal with variant compare if possible
+    function openModal(idx) {
+      const card = cards[idx];
+      if (!card) return;
+      const cat = card.dataset.cat;
+      const title = card.querySelector('h3').textContent;
+      const desc = card.querySelector('p').textContent;
+      const imgSrc = card.querySelector('img').src;
+      const fileName = imgSrc.split('/').pop();
+
+      // Try to find matching variant (v1 <-> v137)
+      let variantHtml = '';
+      const base = fileName.replace(/-v1\.|-v137\./, '');
+      const isV1 = fileName.includes('-v1.');
+      const variantFile = isV1 ? fileName.replace('-v1.', '-v137.') : fileName.replace('-v137.', '-v1.');
+      const hasVariant = cards.some(c => c.querySelector('img')?.src.includes(variantFile));
+
+      if (hasVariant) {
+        const vSrc = imgSrc.replace(fileName, variantFile);
+        variantHtml = `
+          <div style="margin-top:1rem;">
+            <p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Variant comparison</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;">
+              <div><img src="${isV1 ? imgSrc : vSrc}" style="width:100%;border:1px solid var(--surface-border);border-radius:2px;" alt="variant" /><small style="font-size:0.625rem;">${isV1 ? 'v1' : 'v137'}</small></div>
+              <div><img src="${isV1 ? vSrc : imgSrc}" style="width:100%;border:1px solid var(--surface-border);border-radius:2px;" alt="variant" /><small style="font-size:0.625rem;">${isV1 ? 'v137' : 'v1'}</small></div>
+            </div>
+          </div>
+        `;
+      }
+
+      modalBody.innerHTML = `
+        <div>
+          <p style="font-size:0.625rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--brand-primary);margin:0 0 4px;">${cat}</p>
+          <h2 style="margin:0 0 8px;">${title}</h2>
+          <p style="max-width:65ch;color:var(--text-muted);margin-bottom:1rem;">${desc}</p>
+          
+          <div style="border:1px solid var(--surface-border);padding:0.5rem;background:var(--surface-canvas);border-radius:2px;">
+            <img src="${imgSrc}" style="width:100%;max-height:70vh;object-fit:contain;border-radius:2px;" alt="${title}" />
+          </div>
+
+          ${variantHtml}
+
+          <div style="margin-top:1rem;display:flex;gap:0.75rem;flex-wrap:wrap;">
+            <a href="${imgSrc}" download class="cta cta--primary" style="font-size:0.875rem">Download this asset</a>
+            <button class="cta cta--secondary" style="font-size:0.875rem" id="va-close-2">Close</button>
+          </div>
+          <p style="margin-top:0.75rem;font-size:0.6875rem;color:var(--text-soft);">Served from /assets/ — Swiss system, one accent, no second color.</p>
+        </div>
+      `;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+
+      const c2 = modalBody.querySelector('#va-close-2');
+      if (c2) c2.addEventListener('click', closeModal, { once: true });
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalBody.innerHTML = '';
+    }
+
+    gallery.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-va-view]');
+      if (!btn) return;
+      const idx = parseInt(btn.dataset.vaView, 10);
+      openModal(idx);
+    });
+
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  })();
+</script>

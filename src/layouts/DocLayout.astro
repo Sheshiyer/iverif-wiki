@@ -24,7 +24,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
 <BaseLayout title={title} description={description} locale={locale}>
   <section class="doc-stage">
     <div class="doc-shell">
-      <article class="doc-panel glass-panel">
+      <article class="doc-panel swiss-panel">
         <Breadcrumb title={title} category={category} locale={locale} />
 
         <header class="doc-header">
@@ -34,7 +34,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
             {lastUpdated && <span class="pill pill--soft">Updated {lastUpdated}</span>}
           </div>
           <h1>{title}</h1>
-          {description && <p class="doc-description">{description}</p>}
+          {description && <p class="doc-description" style="max-width:60ch">{description}</p>}
         </header>
 
         <div class="prose portal-prose" id="doc-content">
@@ -92,5 +92,61 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
         wrapper.appendChild(button);
       });
     })();
+  </script>
+
+  <script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    let ctx;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function cleanup() {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      ctx?.revert?.();
+      ctx = undefined;
+    }
+
+    function initDocGSAP() {
+      cleanup();
+      if (reduceMotion.matches) return;
+
+      ctx = gsap.context(() => {
+        // Subtle scroll reveals for Swiss doc prose (headings, images, quotes)
+        gsap.fromTo('.portal-prose h2', 
+          { opacity: 0.7, y: 16 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.55, 
+            ease: 'power2.out',
+            scrollTrigger: { trigger: '.portal-prose h2', start: 'top 85%', once: true }
+          }
+        );
+
+        gsap.fromTo('.portal-prose img, .portal-prose blockquote', 
+          { opacity: 0.65, y: 12 }, 
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 0.6, 
+            ease: 'power2.out',
+            stagger: 0.08,
+            scrollTrigger: { 
+              trigger: '.portal-prose', 
+              start: 'top 80%',
+            }
+          }
+        );
+      });
+
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+    }
+
+    document.addEventListener('astro:page-load', initDocGSAP);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState !== 'loading') initDocGSAP();
   </script>
 </BaseLayout>
