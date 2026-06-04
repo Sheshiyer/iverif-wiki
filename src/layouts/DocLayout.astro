@@ -22,8 +22,11 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
 ---
 
 <BaseLayout title={title} description={description} locale={locale}>
+  <!-- Refero-design inspired: non-3-column layout. Overall portal is left-nav + full content (2 areas).
+       TOC integrated into article header as "On this page" list (no right sidebar column to avoid 3-col feel).
+       Use sections, media blocks, dividers over cards. Keep Astro framework, content slots, islands. -->
   <section class="doc-stage">
-    <div class="doc-shell">
+    <div class="doc-shell doc-shell--single">
       <article class="doc-panel swiss-panel">
         <Breadcrumb title={title} category={category} locale={locale} />
 
@@ -35,18 +38,20 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
           </div>
           <h1>{title}</h1>
           {description && <p class="doc-description" style="max-width:60ch">{description}</p>}
+
+          <!-- Integrated TOC (non-sidebar) for single-column flow -->
+          {headings.length > 0 && (
+            <div class="doc-inline-toc">
+              <p class="eyebrow">On this page</p>
+              <TableOfContents headings={headings} locale={locale} />
+            </div>
+          )}
         </header>
 
         <div class="prose portal-prose" id="doc-content">
           <slot />
         </div>
       </article>
-
-      {headings.length > 0 && (
-        <div class="doc-sidebar">
-          <TableOfContents headings={headings} locale={locale} />
-        </div>
-      )}
     </div>
   </section>
 
@@ -100,7 +105,7 @@ const readingTime = Math.max(1, Math.ceil(wordCount / 210));
 
     gsap.registerPlugin(ScrollTrigger);
 
-    let ctx;
+    let ctx: gsap.Context | undefined;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     function cleanup() {

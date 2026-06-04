@@ -14,7 +14,7 @@ interface Props {
   slug?: string;
 }
 
-const { title, description, locale, slug } = Astro.props;
+const { title, description, locale, slug: _slug } = Astro.props;
 const palette = siteData.palette || {};
 const typo = siteData.typography || {};
 const brandVars = {

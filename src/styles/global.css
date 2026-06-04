@@ -671,12 +671,19 @@ body::selection {
   gap: var(--space-3);
 }
 
+/* Refero non-3-col enforcement: max 2 columns for features/visuals; prefer sections + media blocks */
 .feature-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+@media (min-width: 768px) {
+  .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .visual-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+@media (min-width: 768px) {
+  .visual-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .feature-card,
@@ -809,6 +816,33 @@ body::selection {
   gap: var(--space-4);
   align-items: start;
   max-width: var(--content-max);
+}
+
+/* Refero non-3-col: single column content with inline TOC, no right sidebar */
+.doc-shell--single {
+  grid-template-columns: 1fr;
+  max-width: var(--max-content);
+}
+
+.doc-inline-toc {
+  margin-top: var(--space-3);
+  padding: var(--space-2);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-xs);
+  background: var(--surface-canvas);
+  font-size: 0.8125rem;
+}
+.doc-inline-toc .eyebrow {
+  margin-bottom: var(--space-1);
+  color: var(--text-muted);
+}
+.doc-inline-toc .toc-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+.doc-inline-toc .toc-link {
+  font-size: 0.75rem;
 }
 
 .doc-panel {
@@ -1538,13 +1572,21 @@ body::selection {
   .swiss-grid-2 { grid-template-columns: repeat(2, 1fr); }
 }
 
-.swiss-grid-4 {
+/* Non-3-column layouts per refero-design + anti-slop: max 2 columns, sections, media blocks, dividers over cards */
+.swiss-grid-4,
+.swiss-grid-3 {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: var(--space-3);
 }
-@media (min-width: 1024px) {
-  .swiss-grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (min-width: 768px) {
+  .swiss-grid-4,
+  .swiss-grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+.media-block,
+.dual-block {
+  /* Base for refero media blocks / section containers */
 }
 
 .feature-panel,
@@ -1564,9 +1606,10 @@ body::selection {
   }
 }
 
+/* Refero: knowledge as stacked sections with dividers (no sub-grid that creates 3-col feel) */
 .knowledge-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-3);
   margin-top: var(--space-2);
 }

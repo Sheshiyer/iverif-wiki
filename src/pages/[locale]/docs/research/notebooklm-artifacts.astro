@@ -1,15 +1,13 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import ArtifactCard from '../../../../components/ArtifactCard.astro';
-import siteData from '../../../../data/site-data.json';
-import { LOCALES, normalizeLocale, localizedPath, t } from '../../../../i18n';
+import { LOCALES, normalizeLocale } from '../../../../i18n';
 
 export async function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
 }
 
 const locale = normalizeLocale(Astro.params.locale);
-const copy = t(locale);
 
 // Real artifacts from public/notebooklm (authoritative list, no invented names)
 const artifacts = [
@@ -98,43 +96,48 @@ const kinds = Array.from(new Set(artifacts.map(a => a.kind))).sort();
 
 <script>
   (function() {
-    const filters = document.getElementById('filters');
-    const gallery = document.getElementById('gallery');
-    const modal = document.getElementById('artifact-modal');
-    const modalBody = document.getElementById('modal-body');
-    const closeBtn = document.getElementById('modal-close');
+    const filters = document.getElementById('filters')! as HTMLElement;
+    const gallery = document.getElementById('gallery')! as HTMLElement;
+    const modal = document.getElementById('artifact-modal')! as HTMLElement;
+    const modalBody = document.getElementById('modal-body')! as HTMLElement;
+    const closeBtn = document.getElementById('modal-close')! as HTMLElement;
 
-    if (!filters || !gallery) return;
+    if (!filters || !gallery || !modal || !modalBody || !closeBtn) return;
 
     const cards = Array.from(gallery.querySelectorAll('.artifact-card'));
 
     // Filter logic
     filters.addEventListener('click', (e) => {
-      const btn = e.target.closest('.artifact-filter');
+      const btn = (e.target as HTMLElement | null)?.closest('.artifact-filter') as HTMLElement | null;
       if (!btn) return;
-      const kind = btn.dataset.kind;
+      const kind = (btn as HTMLElement).dataset.kind;
 
       filters.querySelectorAll('.artifact-filter').forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
 
-      cards.forEach(card => {
-        if (kind === 'all' || card.dataset.kind === kind) {
-          card.style.display = '';
+      cards.forEach((card: Element) => {
+        const el = card as HTMLElement;
+        if (kind === 'all' || el.dataset.kind === kind) {
+          el.style.display = '';
         } else {
-          card.style.display = 'none';
+          el.style.display = 'none';
         }
       });
     });
 
     // Modal view (reimagined artifact detail)
-    function openModal(idx) {
-      const card = cards[idx];
+    function openModal(idx: number) {
+      const card = cards[idx] as HTMLElement | undefined;
       if (!card) return;
-      const kind = card.dataset.kind;
-      const title = card.querySelector('h3').textContent;
-      const desc = card.querySelector('p:last-of-type').textContent;
-      const media = card.querySelector('.artifact-card__media').innerHTML;
-      const href = card.querySelector('a')?.getAttribute('href') || '#';
+      const kind = (card as HTMLElement).dataset.kind || '';
+      const h3 = card.querySelector('h3') as HTMLElement | null;
+      const p = card.querySelector('p:last-of-type') as HTMLElement | null;
+      const mediaEl = card.querySelector('.artifact-card__media') as HTMLElement | null;
+      const aEl = card.querySelector('a') as HTMLAnchorElement | null;
+      const title = h3?.textContent || '';
+      const desc = p?.textContent || '';
+      const media = mediaEl?.innerHTML || '';
+      const href = aEl?.getAttribute('href') || '#';
 
       modalBody.innerHTML = `
         <div style="max-width:100%">
@@ -166,15 +169,15 @@ const kinds = Array.from(new Set(artifacts.map(a => a.kind))).sort();
 
     // Bind view buttons
     gallery.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-view]');
+      const btn = (e.target as HTMLElement | null)?.closest('[data-view]') as HTMLElement | null;
       if (!btn) return;
-      const idx = parseInt(btn.dataset.view, 10);
+      const idx = parseInt(btn.dataset.view || '0', 10);
       openModal(idx);
     });
 
     // Close handlers
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
+      if ((e.target as HTMLElement | null) === modal) closeModal();
     });
     closeBtn.addEventListener('click', closeModal);
     document.addEventListener('keydown', (e) => {
@@ -184,7 +187,7 @@ const kinds = Array.from(new Set(artifacts.map(a => a.kind))).sort();
     // Keyboard accessibility for filters
     filters.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
-        const btn = e.target.closest('.artifact-filter');
+        const btn = (e.target as HTMLElement | null)?.closest('.artifact-filter') as HTMLElement | null;
         if (btn) {
           e.preventDefault();
           btn.click();

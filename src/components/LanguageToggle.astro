@@ -13,6 +13,7 @@ const { locale, pathname } = Astro.props;
 {LOCALES.length > 1 && (
   <div class="language-toggle" aria-label="Language switcher">
     {LOCALES.map((candidate) => (
+      // @ts-ignore - lang/hrefLang attrs for anchor in Astro template
       <a
         href={switchLocalePath(pathname, candidate)}
         class:list={['language-toggle__link', { 'is-active': candidate === locale }]}

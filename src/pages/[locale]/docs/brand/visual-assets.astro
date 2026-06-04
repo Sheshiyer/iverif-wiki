@@ -67,7 +67,8 @@ const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
         </div>
 
         <!-- Rich Swiss Gallery -->
-        <div class="visual-gallery swiss-grid-4" id="va-gallery" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+        <!-- Non-3-col per refero: gallery capped at ~2-3 fluid but prefer media blocks; using auto-fill for density but constrained -->
+        <div class="visual-gallery swiss-grid-4" id="va-gallery" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
           {visualAssets.map((a, idx) => (
             <div class="swiss-panel visual-asset-card" data-cat={a.cat} data-idx={idx}>
               <img src={a.file} alt={a.title} loading="lazy" style="width:100%; aspect-ratio: 16/10; object-fit:cover; border-radius:2px; border:1px solid var(--surface-border);" />
@@ -179,7 +180,6 @@ const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
 
       // Try to find matching variant (v1 <-> v137)
       let variantHtml = '';
-      const base = fileName.replace(/-v1\.|-v137\./, '');
       const isV1 = fileName.includes('-v1.');
       const variantFile = isV1 ? fileName.replace('-v1.', '-v137.') : fileName.replace('-v137.', '-v1.');
       const hasVariant = cards.some(c => (c.querySelector('img') as HTMLImageElement | null)?.src.includes(variantFile));

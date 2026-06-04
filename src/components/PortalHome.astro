@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import GlassCard from './GlassCard.astro';
 import siteData from '../data/site-data.json';
 import type { Locale } from '../i18n';
 import { localizedDocTitle, localizedFeature, localizedPath, plainText, t } from '../i18n';
@@ -37,8 +36,12 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
 ---
 
 <BaseLayout title={`${siteData.brandName} Launch Portal`} description={siteData.heroSubtitle || siteData.tagline} locale={locale}>
+  <!-- Refero-design redesign: research-first (anti-AI-slop: sections + columns max 2 + media blocks + dividers over cards).
+       Non-3-column layout: capped grids at 2-col, asymmetric/vertical sections, full media blocks.
+       Keep Astro framework (layouts, components, collections, client scripts for filters/GSAP/modals, content slots).
+       Synthesized from refero craft (no generic 3-col feature grids, no default cards, precise technical tone for regulatory AI brand). -->
   <section class="home-stage swiss-home">
-    <!-- Asymmetric Hero: Swiss narrow copy + visual (taste: split, anti-center) -->
+    <!-- Asymmetric Hero: 2-col max (left copy narrow, right media block) -->
     <section class="hero hero--asymmetric">
       <div class="hero-copy" style="max-width: 60ch;">
         <p class="eyebrow">{siteData.themeName.toUpperCase()} · {siteData.launchChannel}</p>
@@ -60,7 +63,7 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
         {metrics.length > 0 && (
           <div class="metric-row">
             {metrics.map((metric) => (
-              <div class="metric" key={metric.label}>
+              <div class="metric">
                 <strong>{metric.value}</strong>
                 <span>{metric.label}</span>
               </div>
@@ -93,6 +96,7 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
         <h2>{copy.home.homeHeading}</h2>
         <p style="max-width:60ch">{copy.home.homeBlurb}</p>
       </div>
+      <!-- 2-col max sections (no 3-col). Use media/text blocks + dividers -->
       <div class="feature-grid swiss-grid-2">
         {featuredDocs.map((doc) => {
           const slug = (doc.href || '').replace(/^\/docs\//, '').replace(/^\//, '');
@@ -103,12 +107,14 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
             description: localizedDoc?.data.description || doc.description,
           });
           return (
-            <a class="swiss-panel feature-panel" href={localizedPath(locale, doc.href)}>
-              <p class="panel-eyebrow">{plainText(localized.eyebrow)}</p>
-              <h3>{plainText(localized.title)}</h3>
-              <p>{plainText(localized.description)}</p>
-              <span class="panel-link">{copy.shell.openSection} →</span>
-            </a>
+            <div class="media-block" style="padding-bottom:var(--space-3);">
+              <a href={localizedPath(locale, doc.href)} style="text-decoration:none;color:inherit;">
+                <p class="panel-eyebrow">{plainText(localized.eyebrow)}</p>
+                <h3>{plainText(localized.title)}</h3>
+                <p>{plainText(localized.description)}</p>
+                <span class="panel-link" style="display:block;margin-top:var(--space-2);">{copy.shell.openSection} →</span>
+              </a>
+            </div>
           );
         })}
       </div>
@@ -120,30 +126,33 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
         <p class="eyebrow">{copy.home.visualWorld}</p>
         <h2>{copy.home.visualHeading}</h2>
       </div>
+      <!-- Non-3-col: 2-col max media blocks (image + text beside or stacked), dividers between -->
       <div class="visual-grid swiss-grid-4">
         {visualHighlights.map((item) => (
-          <a class="swiss-panel visual-panel" href={localizedPath(locale, item.href)}>
-            {item.image && <img src={item.image} alt={item.title} class="panel-image" />}
-            <div class="panel-body">
-              <p class="panel-eyebrow">{item.eyebrow}</p>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-          </a>
+          <div class="media-block" style="border-bottom:1px solid var(--surface-border);padding-bottom:var(--space-3);margin-bottom:var(--space-3);">
+            <a href={localizedPath(locale, item.href)} style="display:block;">
+              {item.image && <img src={item.image} alt={item.title} class="panel-image" style="margin-bottom:var(--space-2);" />}
+              <div>
+                <p class="panel-eyebrow">{item.eyebrow}</p>
+                <h3 style="margin:0 0 var(--space-1);">{item.title}</h3>
+                <p style="margin:0;">{item.description}</p>
+              </div>
+            </a>
+          </div>
         ))}
       </div>
     </section>
 
-    <!-- Dual: Knowledge map (list) + Research spotlight (taste: dual narrow, Swiss generous whitespace) -->
+    <!-- Dual: 2-col max (knowledge list + research media rows). Refero: use sections + dividers + media blocks (research-row is image+text block); avoid full cards where possible. Stacked knowledge for non-3-col. -->
     <section class="home-section home-section--dual" data-scroll>
-      <div class="swiss-panel knowledge-panel">
+      <div class="dual-block" style="border:1px solid var(--surface-border);padding:var(--space-3);">
         <div class="section-heading section-heading--compact">
           <p class="eyebrow">{copy.home.knowledgeMap}</p>
           <h2>{copy.home.knowledgeHeading}</h2>
         </div>
         <div class="knowledge-grid">
           {orderedCategories.map(([category, categoryDocs]) => (
-            <div class="knowledge-col" key={category}>
+            <div style="border-bottom:1px solid var(--surface-border);padding-bottom:var(--space-2);margin-bottom:var(--space-2);">
               <p class="panel-eyebrow">{copy.categories[category as keyof typeof copy.categories] || category}</p>
               <ul class="knowledge-list">
                 {categoryDocs.map((doc) => (
@@ -159,7 +168,7 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
         </div>
       </div>
 
-      <div class="swiss-panel research-panel">
+      <div class="dual-block" style="border:1px solid var(--surface-border);padding:var(--space-3);">
         <div class="section-heading section-heading--compact">
           <p class="eyebrow">{copy.home.notebooklmSpotlight}</p>
           <h2>{copy.home.notebooklmHeading}</h2>
@@ -180,9 +189,9 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
       </div>
     </section>
 
-    <!-- Closing: Swiss restrained banner -->
+    <!-- Closing: section block (no card) per refero anti-slop -->
     <section class="home-section" data-scroll>
-      <div class="swiss-panel closing-panel accent">
+      <div style="border:1px solid var(--surface-border);padding:var(--space-4);">
         <div>
           <p class="eyebrow">{copy.shell.freshBuild}</p>
           <h2>{siteData.runLabel}</h2>
@@ -203,7 +212,7 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  let ctx;
+  let ctx: gsap.Context | undefined;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function cleanup() {
@@ -218,7 +227,7 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
 
     ctx = gsap.context(() => {
       // Subtle scroll-triggered reveals for home sections (transform + opacity only, Swiss restraint)
-      gsap.utils.toArray('[data-scroll]').forEach((section, i) => {
+      gsap.utils.toArray<HTMLElement>('[data-scroll]').forEach((section, i) => {
         gsap.fromTo(
           section,
           { opacity: 0.6, y: 24 },
@@ -237,9 +246,9 @@ const orderedCategories = Object.entries(categories).sort(([a], [b]) => {
         );
       });
 
-      // Light stagger on visual panels
+      // Light stagger on visual media blocks (refero media blocks)
       gsap.fromTo(
-        '.visual-panel',
+        '.visual-grid .media-block',
         { opacity: 0, y: 16 },
         {
           opacity: 1,
