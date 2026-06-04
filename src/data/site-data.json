@@ -1,0 +1,145 @@
+{
+  "brandName": "iverif.io",
+  "tagline": "AI document validation for energy subsidy operators",
+  "themeName": "Signal in the System",
+  "defaultTheme": "light",
+  "launchChannel": "saas",
+  "heroTitle": "Stop losing subsidy claims to avoidable document errors.",
+  "heroSubtitle": "A visual system built on precision, clarity, and trust. Where regulatory complexity meets AI elegance.",
+  "heroDescription": "iverif.io brings together product narrative, visual direction, and launch-ready research in one review portal.",
+  "heroPrimaryHref": "/docs/product/overview",
+  "heroSecondaryHref": "/docs/research/notebooklm-artifacts",
+  "docsHomeHref": "/docs/index",
+  "heroImage": "",
+  "heroImageAlt": "",
+  "metrics": [
+    {
+      "label": "Brandmint outputs",
+      "value": "7"
+    },
+    {
+      "label": "Visual assets",
+      "value": "0"
+    },
+    {
+      "label": "NotebookLM artifacts",
+      "value": "0"
+    },
+    {
+      "label": "Reports surfaced",
+      "value": "0"
+    }
+  ],
+  "launchFacts": [
+    {
+      "label": "Launch channel",
+      "value": "saas"
+    },
+    {
+      "label": "Quality bar",
+      "value": "premium"
+    },
+    {
+      "label": "Notebook policy",
+      "value": "fresh-per-spec"
+    },
+    {
+      "label": "Image policy",
+      "value": "product-reference-only"
+    }
+  ],
+  "storyPillars": [
+    "Regulatory precision",
+    "AI intelligence",
+    "Managed expertise",
+    "EU-native compliance"
+  ],
+  "featuredDocs": [
+    {
+      "title": "Product Overview",
+      "description": "Hero product definition, positioning, and messaging stack for the current launch build.",
+      "href": "/docs/product/overview",
+      "icon": "",
+      "eyebrow": "Product"
+    },
+    {
+      "title": "Visual Guidelines",
+      "description": "Palette, typography, art direction, and brand-system guardrails for the current run.",
+      "href": "/docs/brand/visual-guidelines",
+      "icon": "",
+      "eyebrow": "Brand System"
+    },
+    {
+      "title": "Campaign Copy",
+      "description": "Campaign narratives, key copy assets, and launch-ready messaging organized for review.",
+      "href": "/docs/marketing/campaign-copy",
+      "icon": "",
+      "eyebrow": "Campaign"
+    },
+    {
+      "title": "NotebookLM Artifacts",
+      "description": "Surfaced reports, infographics, decks, audio, and research tables produced during Wave 7.",
+      "href": "/docs/research/notebooklm-artifacts",
+      "icon": "",
+      "eyebrow": "Research"
+    }
+  ],
+  "visualHighlights": [],
+  "notebooklmHighlights": [],
+  "publishedAtHuman": "June 03, 2026 at 10:28 PM",
+  "runLabel": "Latest iverif launch build",
+  "palette": {
+    "primary": {
+      "name": "Signal Green",
+      "hex": "#2EE600",
+      "role": "60% \u2014 CTAs, validation indicators, primary actions, alive elements"
+    },
+    "secondary": {
+      "name": "Regulatory Stone",
+      "hex": "#1C1917",
+      "role": "30% \u2014 text, anchoring surfaces, authority"
+    },
+    "accent": {
+      "name": "Clean White",
+      "hex": "#FAFAF9",
+      "role": "10% \u2014 backgrounds, breathing room, contrast"
+    },
+    "support": {
+      "name": "Medium Stone",
+      "hex": "#78716C",
+      "role": "Borders, metadata, secondary text"
+    },
+    "signal": {
+      "name": "Alert Amber",
+      "hex": "#F59E0B",
+      "role": "Warning states, attention flags, review needed"
+    }
+  },
+  "typography": {
+    "header": {
+      "font": "Geist Sans",
+      "weights": [
+        "Light",
+        "Regular",
+        "SemiBold"
+      ],
+      "display_weight": "Light",
+      "emphasis_weight": "SemiBold",
+      "case": "title case"
+    },
+    "body": {
+      "font": "Geist Sans",
+      "weights": [
+        "Regular",
+        "Medium"
+      ]
+    },
+    "data": {
+      "font": "Geist Mono",
+      "weights": [
+        "Regular",
+        "Medium"
+      ]
+    }
+  }
+}

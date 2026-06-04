@@ -1,0 +1,305 @@
+{
+  "title": "iverif.io Flashcards",
+  "cards": [
+    {
+      "front": "What is the official brand name for the AI document validation platform?",
+      "back": "iverif.io"
+    },
+    {
+      "front": "What is the brand tagline for iverif.io?",
+      "back": "AI document validation for energy subsidy operators"
+    },
+    {
+      "front": "Which brand archetype is assigned to iverif.io?",
+      "back": "The Architect"
+    },
+    {
+      "front": "Name the three core tones that define the iverif.io voice.",
+      "back": "Precise, authoritative, and confident."
+    },
+    {
+      "front": "What is the name of the visual system theme for iverif.io?",
+      "back": "Signal in the System"
+    },
+    {
+      "front": "Which visual metaphor describes iverif.io as a place where regulatory complexity meets AI elegance?",
+      "back": "A high-precision instrument panel."
+    },
+    {
+      "front": "What is the hex code for 'Signal Green'?",
+      "back": "#2EE600"
+    },
+    {
+      "front": "What is the hex code for 'Regulatory Stone'?",
+      "back": "#1C1917"
+    },
+    {
+      "front": "What is the hex code for 'Clean White'?",
+      "back": "#FAFAF9"
+    },
+    {
+      "front": "What is the hex code for 'Medium Stone', used for borders and metadata?",
+      "back": "#78716C"
+    },
+    {
+      "front": "What is the hex code for 'Alert Amber', used for warning states?",
+      "back": "#F59E0B"
+    },
+    {
+      "front": "Which typeface is used for headers and body text in the iverif.io brand?",
+      "back": "Geist Sans"
+    },
+    {
+      "front": "Which typeface is used for data fields, validation reports, and audit trails?",
+      "back": "Geist Mono"
+    },
+    {
+      "front": "What psychological response is 'Signal Green' intended to trigger?",
+      "back": "Validation and correctness (a 'go-signal')."
+    },
+    {
+      "front": "What psychological characteristic is 'Regulatory Stone' intended to communicate?",
+      "back": "Authority and permanence."
+    },
+    {
+      "front": "Identify the primary material texture used to suggest precision in the iverif.io brand world.",
+      "back": "Brushed aluminum"
+    },
+    {
+      "front": "Which paper texture is specified for the iverif.io brand materials?",
+      "back": "Fine-grain stone paper"
+    },
+    {
+      "front": "What is the name of the brand's writing persona?",
+      "back": "The Compliance Expert"
+    },
+    {
+      "front": "How does the 'Compliance Expert' persona view its relationship with the target audience?",
+      "back": "As a trusted colleague who understands regulatory complexity."
+    },
+    {
+      "front": "List the three core values of the iverif.io brand culture.",
+      "back": "Precision, Accuracy, and Reliability."
+    },
+    {
+      "front": "The primary target persona for iverif.io is known as _____.",
+      "back": "The Compliance Operator"
+    },
+    {
+      "front": "What is the typical company size of an iverif.io target customer?",
+      "back": "10 to 500 employees"
+    },
+    {
+      "front": "What is the primary emotional driver for the Compliance Operator?",
+      "back": "Regulatory peace of mind."
+    },
+    {
+      "front": "What is the secondary emotional driver for the Compliance Operator?",
+      "back": "Operational pride."
+    },
+    {
+      "front": "According to the buyer persona, what is the 'tertiary' emotional driver?",
+      "back": "Time reclaimed."
+    },
+    {
+      "front": "How many documents are typically found in a single subsidy dossier that requires manual cross-checking?",
+      "back": "10 to 20 documents"
+    },
+    {
+      "front": "What specific job title is listed as a target audience member for iverif.io?",
+      "back": "Back-office Manager"
+    },
+    {
+      "front": "Name one energy subsidy programme iverif.io is pre-configured to handle.",
+      "back": "CEE (or BEG, ECO4, Conto Termico, Primes \u00c9nergie, MOVES III)."
+    },
+    {
+      "front": "What is the processing speed benchmark for iverif.io to validate a full dossier?",
+      "back": "30 seconds"
+    },
+    {
+      "front": "What is the target dossier rejection rate for iverif.io users?",
+      "back": "Under 2%"
+    },
+    {
+      "front": "How many EU programmes are currently pre-configured on the iverif.io platform?",
+      "back": "6"
+    },
+    {
+      "front": "What technology is used for structured data extraction and cross-document reasoning?",
+      "back": "Generative AI"
+    },
+    {
+      "front": "What market gap exists regarding generic OCR tools and document validation?",
+      "back": "They cannot handle cross-document consistency checking."
+    },
+    {
+      "front": "What is the primary weakness of legacy DMS (e.g., SharePoint) compared to iverif.io?",
+      "back": "A lack of AI extraction and validation logic."
+    },
+    {
+      "front": "What is the 'go-live' time frame for iverif.io compared to the months required by competitors?",
+      "back": "5 to 7 days"
+    },
+    {
+      "front": "What is the 'Unique Claim' (USP) of the iverif.io platform?",
+      "back": "The only AI platform specifically for EU energy subsidy operators with managed onboarding."
+    },
+    {
+      "front": "Which famous design reference is cited for the brand's illustration style?",
+      "back": "Dieter Rams product photography."
+    },
+    {
+      "front": "What specific photography style is required for brand imagery?",
+      "back": "High-contrast editorial with documentary precision."
+    },
+    {
+      "front": "Which camera and lens combination is specified in the photography direction?",
+      "back": "Sony A7 IV with a 35mm f/1.4 lens."
+    },
+    {
+      "front": "In the MDS Messaging Hierarchy, what is the functional benefit of 'Audit trails'?",
+      "back": "Ensuring regulatory compliance with timestamped logs."
+    },
+    {
+      "front": "What self-expressive reason drives the iverif.io audience?",
+      "back": "Demonstrating a commitment to process excellence."
+    },
+    {
+      "front": "How does iverif.io rebut the concern regarding AI accuracy?",
+      "back": "By using explainable AI output and highlighting their target rejection rate of <2%."
+    },
+    {
+      "front": "Which modern tech brand is listed as an 'Aspirational Brand' for iverif.io's imagery?",
+      "back": "Stripe (or Notion, Vercel, Linear)."
+    },
+    {
+      "front": "What is the core problem iverif.io aims to solve?",
+      "back": "Avoidable document errors leading to lost subsidy claims."
+    },
+    {
+      "front": "Where must the iverif.io infrastructure be hosted to ensure GDPR compliance?",
+      "back": "The European Union (EU-hosted)."
+    },
+    {
+      "front": "What is the 'Physical Form' of the iverif.io product?",
+      "back": "A web platform with API integration (white-label ready)."
+    },
+    {
+      "front": "Which graphic element shape is prohibited in the visual guidelines for data elements?",
+      "back": "Rounded corners."
+    },
+    {
+      "front": "What is the logo clear space requirement?",
+      "back": "Minimum 1x icon height on all sides."
+    },
+    {
+      "front": "According to the Competitive Landscape, why can't 'Single-market tools' compete effectively?",
+      "back": "They cannot serve multi-country operators."
+    },
+    {
+      "front": "In the 'Lingo' section, what is the acronym for the Italian energy subsidy programme mentioned?",
+      "back": "Conto Termico"
+    },
+    {
+      "front": "What is the 'Loyalty Logic' that keeps customers using iverif.io?",
+      "back": "Exclusive access to pre-configured rules and managed onboarding expertise."
+    },
+    {
+      "front": "What is the primary mission of iverif.io?",
+      "back": "To empower EU energy subsidy operators with AI-powered document validation."
+    },
+    {
+      "front": "Which material texture is associated with the brand's 'Signal in the System' metaphor?",
+      "back": "Green LED indicator glass"
+    },
+    {
+      "front": "What is the purpose of the 'Validation Engine' feature?",
+      "back": "Real-time cross-document field extraction and rule checking."
+    },
+    {
+      "front": "Which professional job title focuses on maintaining the audit trail for regulatory bodies?",
+      "back": "Compliance Officer"
+    },
+    {
+      "front": "What is the 'ethos' of iverif.io?",
+      "back": "Belief in regulatory compliance and process excellence."
+    },
+    {
+      "front": "Name the specific typeface weight used for 'Data' elements.",
+      "back": "Geist Mono Regular or Medium."
+    },
+    {
+      "front": "What is the core target demographic 'Company Type'?",
+      "back": "Energy subsidy operators, ESCos, aggregators, or retrofit coordinators."
+    },
+    {
+      "front": "What is the desired emotional response from a customer using iverif.io?",
+      "back": "Confidence and Trust."
+    },
+    {
+      "front": "How does iverif.io address the objection that 'manual processes work well enough'?",
+      "back": "By highlighting the inability to scale without proportional team growth."
+    },
+    {
+      "front": "Which specific 'Flatlay Object' represents the technical nature of the desk?",
+      "back": "Fine-tip pen on a regulatory desk."
+    },
+    {
+      "front": "Which specific 'Flatlay Object' represents the regulatory focus of the brand?",
+      "back": "An EU flag pin."
+    },
+    {
+      "front": "What is the 'Salience' category for iverif.io positioning?",
+      "back": "RegTech SaaS / EU Energy Subsidies."
+    },
+    {
+      "front": "What is a 'Point of Difference' for iverif.io compared to standard document tools?",
+      "back": "Managed onboarding where a real team configures your rules."
+    },
+    {
+      "front": "What camera color profile is specified for brand photography?",
+      "back": "Neutral color profile."
+    },
+    {
+      "front": "In the visual identity, what is the role of 'Circuit board traces'?",
+      "back": "A subtle texture that communicates technical competence."
+    },
+    {
+      "front": "Which typeface is prohibited for use as the primary body font?",
+      "back": "Any font other than Geist Sans."
+    },
+    {
+      "front": "What is the primary constraint for logo placement?",
+      "back": "It must always be on a white or light stone background."
+    },
+    {
+      "front": "Name a 'verified anxiety' regarding the transition to iverif.io.",
+      "back": "AI accuracy with edge cases (or data security/integration complexity)."
+    },
+    {
+      "front": "How is the 'Managed Expertise' benefit described?",
+      "back": "Dedicated support to ensure seamless integration and setup."
+    },
+    {
+      "front": "Which EU programme acronym refers specifically to the UK market?",
+      "back": "ECO4"
+    },
+    {
+      "front": "What is the primary 'functional' value proposition?",
+      "back": "Reduced errors and guaranteed compliance with EU programmes."
+    },
+    {
+      "front": "What is the required tone for all customer-facing communications?",
+      "back": "Conversion-focused, professional, and clean."
+    },
+    {
+      "front": "What is the 'Signal in the System' metaphor meant to represent visually?",
+      "back": "A system where regulatory complexity meets AI elegance."
+    },
+    {
+      "front": "How does iverif.io define its 'Ethos' in one sentence?",
+      "back": "Commitment to delivering innovative solutions that support customers' regulatory success."
+    }
+  ]
+}

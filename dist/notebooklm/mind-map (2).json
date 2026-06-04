@@ -1,0 +1,128 @@
+{
+  "name": "iverif.io Platform",
+  "children": [
+    {
+      "name": "Value Proposition",
+      "children": [
+        {
+          "name": "AI-Powered Validation"
+        },
+        {
+          "name": "Regulatory Precision"
+        },
+        {
+          "name": "Reduced Dossier Rejections"
+        },
+        {
+          "name": "Time Reclamation"
+        }
+      ]
+    },
+    {
+      "name": "Technical Capabilities",
+      "children": [
+        {
+          "name": "30-Second Processing Speed"
+        },
+        {
+          "name": "Cross-Document Reasoning"
+        },
+        {
+          "name": "Pre-configured EU Programme Rules"
+        },
+        {
+          "name": "GDPR Compliant Infrastructure"
+        },
+        {
+          "name": "Full API Integration"
+        }
+      ]
+    },
+    {
+      "name": "Market Strategy",
+      "children": [
+        {
+          "name": "Target Audience",
+          "children": [
+            {
+              "name": "Compliance Operators"
+            },
+            {
+              "name": "Energy Subsidy Aggregators"
+            },
+            {
+              "name": "Operations Directors"
+            }
+          ]
+        },
+        {
+          "name": "Competitive Differentiators",
+          "children": [
+            {
+              "name": "Managed Onboarding"
+            },
+            {
+              "name": "Multi-Country Support"
+            },
+            {
+              "name": "Specific Rule Engines"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Brand Identity",
+      "children": [
+        {
+          "name": "Voice and Tone",
+          "children": [
+            {
+              "name": "Precise"
+            },
+            {
+              "name": "Authoritative"
+            },
+            {
+              "name": "Quietly Confident"
+            }
+          ]
+        },
+        {
+          "name": "Visual System",
+          "children": [
+            {
+              "name": "Signal Green Palette"
+            },
+            {
+              "name": "Regulatory Stone Anchor"
+            },
+            {
+              "name": "Geist Sans Typography"
+            }
+          ]
+        },
+        {
+          "name": "Archetype: The Architect"
+        }
+      ]
+    },
+    {
+      "name": "User Pain Points",
+      "children": [
+        {
+          "name": "Manual Cross-Checking Errors"
+        },
+        {
+          "name": "Expensive Post-Submission Rejections"
+        },
+        {
+          "name": "Changing Programme Rules"
+        },
+        {
+          "name": "Lack of Audit Trails"
+        }
+      ]
+    }
+  ]
+}
