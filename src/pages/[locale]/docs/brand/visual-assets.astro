@@ -1,13 +1,12 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
-import { LOCALES, normalizeLocale, localizedPath, t } from '../../../../i18n';
+import { LOCALES, normalizeLocale } from '../../../../i18n';
 
 export async function getStaticPaths() {
   return LOCALES.map((locale) => ({ params: { locale } }));
 }
 
 const locale = normalizeLocale(Astro.params.locale);
-const copy = t(locale);
 
 // Real files only from public/assets/generated and /website
 const visualAssets = [
@@ -108,19 +107,20 @@ const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
   gsap.registerPlugin(ScrollTrigger);
 
   (function() {
-    const filters = document.getElementById('va-filters');
-    const gallery = document.getElementById('va-gallery');
-    const modal = document.getElementById('va-modal');
-    const modalBody = document.getElementById('va-modal-body');
-    const closeBtn = document.getElementById('va-modal-close');
+    const filters = document.getElementById('va-filters') as HTMLElement;
+    const gallery = document.getElementById('va-gallery') as HTMLElement;
+    const modal = document.getElementById('va-modal') as HTMLElement;
+    const modalBody = document.getElementById('va-modal-body') as HTMLElement;
+    const closeBtn = document.getElementById('va-modal-close') as HTMLElement;
 
-    const cards = Array.from(gallery.querySelectorAll('.visual-asset-card'));
+    const cards = Array.from(gallery.querySelectorAll('.visual-asset-card')) as HTMLElement[];
 
     // Filter
     filters.addEventListener('click', (e) => {
-      const btn = e.target.closest('.artifact-filter');
+      const target = e.target as HTMLElement | null;
+      const btn = target?.closest('.artifact-filter') as HTMLElement | null;
       if (!btn) return;
-      const cat = btn.dataset.cat;
+      const cat = btn.dataset.cat || 'all';
       filters.querySelectorAll('.artifact-filter').forEach(b => b.classList.remove('is-active'));
       btn.classList.add('is-active');
       cards.forEach(card => {
@@ -129,7 +129,7 @@ const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
     });
 
     // GSAP ScrollTrigger on this page for the visual grid (tasteful, reduced-motion safe)
-    let ctx;
+    let ctx: gsap.Context | undefined;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     function initGSAP() {
@@ -165,21 +165,24 @@ const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
     if (document.readyState !== 'loading') initGSAP();
 
     // Modal with variant compare if possible
-    function openModal(idx) {
+    function openModal(idx: number) {
       const card = cards[idx];
       if (!card) return;
       const cat = card.dataset.cat;
-      const title = card.querySelector('h3').textContent;
-      const desc = card.querySelector('p').textContent;
-      const imgSrc = card.querySelector('img').src;
-      const fileName = imgSrc.split('/').pop();
+      const titleEl = card.querySelector('h3') as HTMLElement | null;
+      const title = titleEl?.textContent || '';
+      const descEl = card.querySelector('p') as HTMLElement | null;
+      const desc = descEl?.textContent || '';
+      const imgEl = card.querySelector('img') as HTMLImageElement | null;
+      const imgSrc = imgEl?.src || '';
+      const fileName = imgSrc.split('/').pop() || '';
 
       // Try to find matching variant (v1 <-> v137)
       let variantHtml = '';
       const base = fileName.replace(/-v1\.|-v137\./, '');
       const isV1 = fileName.includes('-v1.');
       const variantFile = isV1 ? fileName.replace('-v1.', '-v137.') : fileName.replace('-v137.', '-v1.');
-      const hasVariant = cards.some(c => c.querySelector('img')?.src.includes(variantFile));
+      const hasVariant = cards.some(c => (c.querySelector('img') as HTMLImageElement | null)?.src.includes(variantFile));
 
       if (hasVariant) {
         const vSrc = imgSrc.replace(fileName, variantFile);
@@ -213,30 +216,34 @@ const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
           <p style="margin-top:0.75rem;font-size:0.6875rem;color:var(--text-soft);">Served from /assets/ — Swiss system, one accent, no second color.</p>
         </div>
       `;
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden', 'false');
+      modal!.classList.add('open');
+      modal!.setAttribute('aria-hidden', 'false');
 
-      const c2 = modalBody.querySelector('#va-close-2');
+      const c2 = modalBody!.querySelector('#va-close-2');
       if (c2) c2.addEventListener('click', closeModal, { once: true });
     }
 
     function closeModal() {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden', 'true');
-      modalBody.innerHTML = '';
+      modal!.classList.remove('open');
+      modal!.setAttribute('aria-hidden', 'true');
+      modalBody!.innerHTML = '';
     }
 
-    gallery.addEventListener('click', (e) => {
-      const btn = e.target.closest('[data-va-view]');
+    gallery!.addEventListener('click', (e: Event) => {
+      const target = (e.target as HTMLElement | null);
+      const btn = target?.closest('[data-va-view]') as HTMLElement | null;
       if (!btn) return;
-      const idx = parseInt(btn.dataset.vaView, 10);
+      const idx = parseInt(btn.dataset.vaView || '0', 10);
       openModal(idx);
     });
 
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    closeBtn.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    modal!.addEventListener('click', (e: Event) => { 
+      const target = (e.target as HTMLElement | null);
+      if (target === modal) closeModal(); 
+    });
+    closeBtn!.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && modal!.classList.contains('open')) closeModal();
     });
   })();
 </script>

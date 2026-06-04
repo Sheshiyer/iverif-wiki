@@ -104,6 +104,8 @@ const kinds = Array.from(new Set(artifacts.map(a => a.kind))).sort();
     const modalBody = document.getElementById('modal-body');
     const closeBtn = document.getElementById('modal-close');
 
+    if (!filters || !gallery) return;
+
     const cards = Array.from(gallery.querySelectorAll('.artifact-card'));
 
     // Filter logic
