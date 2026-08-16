@@ -22,8 +22,8 @@ This dossier index summarizes the latest launch documentation build.
 - **Brand:** iverif.io
 - **Tagline:** AI document validation for energy subsidy operators
 - **Source outputs:** 7 structured JSON documents from brand analysis skills
-- **NotebookLM artifacts:** 24 generated artifacts (reports, decks, mind maps, audio, data)
-- **Visual assets:** 16 original images via GPT Image 2
+- **NotebookLM artifacts:** 24 repository-tracked files (reports, decks, mind maps, audio, data)
+- **Visual assets:** 21 generated and curated image files in the current inventory
 - **Published site:** Deployed to Vercel
 
 ## Primary Sections
