@@ -16,7 +16,7 @@ icon: ""
 
 **Rich interactive gallery with audio players, image previews, filters, and modal viewer:** open the NotebookLM section from the portal home or visit the research hub.
 
-All 24+ real artifacts (audio, infographics, decks, mind maps, flashcards, quizzes) are listed with direct links to the files in `/notebooklm/`.
+All 24 repository-tracked artifacts (audio, infographics, decks, mind maps, flashcards, quizzes, reports, tables, and videos) are listed with direct links to the files in `/notebooklm/`.
 
 See the rendered experience at this route for the full reimagined view (filters, previews, detail modal).
 

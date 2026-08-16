@@ -4,6 +4,7 @@ import { promises as fs } from 'node:fs';
 import {
   collectRepositoryContracts,
   distCandidatesForRoute,
+  readJsonFile,
   readTextFile,
 } from './lib/verification-core.mjs';
 
@@ -11,6 +12,14 @@ async function main() {
   const rootDir = process.cwd();
   const distDir = path.join(rootDir, 'dist');
   const contracts = await collectRepositoryContracts(rootDir);
+  const artifactsCatalog = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'artifacts.json'),
+    'src/data/artifacts.json',
+  );
+  const visualAssetsCatalog = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'visual-assets.json'),
+    'src/data/visual-assets.json',
+  );
   const errors = [];
 
   try {
@@ -64,6 +73,29 @@ async function main() {
     }
   }
 
+  for (const locale of contracts.locales) {
+    await validateRenderedInventory({
+      countLabel: `${artifactsCatalog.totalCount} artifacts`,
+      distDir,
+      entries: artifactsCatalog.artifacts,
+      errors,
+      itemMarker: 'class="artifact-card"',
+      label: 'NotebookLM inventory page',
+      rootDir,
+      route: `/${locale}/docs/research/notebooklm-artifacts`,
+    });
+    await validateRenderedInventory({
+      countLabel: `${visualAssetsCatalog.totalCount} assets`,
+      distDir,
+      entries: visualAssetsCatalog.assets,
+      errors,
+      itemMarker: 'class="swiss-panel visual-asset-card"',
+      label: 'visual asset inventory page',
+      rootDir,
+      route: `/${locale}/docs/brand/visual-assets`,
+    });
+  }
+
   if (errors.length > 0) {
     reportErrors(errors);
     return;
@@ -87,6 +119,41 @@ async function findFirstExistingFile(candidates) {
   }
 
   return null;
+}
+
+async function validateRenderedInventory({
+  countLabel,
+  distDir,
+  entries,
+  errors,
+  itemMarker,
+  label,
+  rootDir,
+  route,
+}) {
+  const outputFile = await findFirstExistingFile(distCandidatesForRoute(distDir, route));
+  if (!outputFile) return;
+
+  const html = await readTextFile(outputFile);
+  const renderedCount = html.split(itemMarker).length - 1;
+  if (renderedCount !== entries.length) {
+    errors.push(`${route}: ${label} renders ${renderedCount} items, expected ${entries.length}.`);
+  }
+
+  if (!html.includes(countLabel)) {
+    errors.push(`${route}: ${label} does not render inventory count label "${countLabel}".`);
+  }
+
+  for (const entry of entries) {
+    const publicPath = `/${entry.file.replace(/^\/+/, '')}`;
+    if (!html.includes(publicPath) && !html.includes(encodeURI(publicPath))) {
+      errors.push(`${route}: ${label} does not link inventory file ${publicPath}.`);
+    }
+  }
+
+  if (!html.includes('<html')) {
+    errors.push(`${route}: ${path.relative(rootDir, outputFile)} does not look like an HTML page.`);
+  }
 }
 
 function reportErrors(errors) {

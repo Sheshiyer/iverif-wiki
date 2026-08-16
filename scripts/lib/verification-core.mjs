@@ -142,7 +142,7 @@ export function collectMarkdownReferences(markdown) {
   return references;
 }
 
-export function validateArtifactsCatalog(catalog, fileLabel = 'src/data/artifacts.json') {
+export function validateArtifactsCatalog(catalog, fileLabel = 'src/data/artifacts.json', publicPaths = null) {
   const errors = [];
 
   if (!isPlainObject(catalog)) {
@@ -183,20 +183,13 @@ export function validateArtifactsCatalog(catalog, fileLabel = 'src/data/artifact
       continue;
     }
 
-    if ('kind' in artifact) {
-      if (typeof artifact.kind !== 'string' || artifact.kind.trim() === '') {
-        errors.push(`${fileLabel}: artifacts[${index}].kind must be a non-empty string when provided.`);
-        continue;
-      }
+    requireString(errors, `${fileLabel}: artifacts[${index}].file`, artifact.file);
+    requireString(errors, `${fileLabel}: artifacts[${index}].kind`, artifact.kind);
+    requireString(errors, `${fileLabel}: artifacts[${index}].title`, artifact.title);
+    requireString(errors, `${fileLabel}: artifacts[${index}].description`, artifact.description);
+
+    if (typeof artifact.kind === 'string' && artifact.kind.trim() !== '') {
       computedByType.set(artifact.kind, (computedByType.get(artifact.kind) ?? 0) + 1);
-    }
-
-    if ('file' in artifact && (typeof artifact.file !== 'string' || artifact.file.trim() === '')) {
-      errors.push(`${fileLabel}: artifacts[${index}].file must be a non-empty string when provided.`);
-    }
-
-    if ('href' in artifact && (typeof artifact.href !== 'string' || artifact.href.trim() === '')) {
-      errors.push(`${fileLabel}: artifacts[${index}].href must be a non-empty string when provided.`);
     }
   }
 
@@ -215,6 +208,128 @@ export function validateArtifactsCatalog(catalog, fileLabel = 'src/data/artifact
           `${fileLabel}: byType.${kind} must equal the number of artifacts with kind "${kind}" (expected ${expected}, received ${received}).`,
         );
       }
+    }
+  }
+
+  if (publicPaths instanceof Set) {
+    errors.push(...validatePublicInventoryCoverage({
+      entries: catalog.artifacts,
+      fileLabel: `${fileLabel}: artifacts`,
+      governedPrefixes: ['/notebooklm/'],
+      publicPaths,
+    }));
+  }
+
+  return errors;
+}
+
+export function validateVisualAssetsCatalog(
+  catalog,
+  publicPaths,
+  fileLabel = 'src/data/visual-assets.json',
+) {
+  const errors = [];
+
+  if (!isPlainObject(catalog)) {
+    return [`${fileLabel}: expected a JSON object at the top level.`];
+  }
+
+  requireString(errors, `${fileLabel}: version`, catalog.version);
+  requireString(errors, `${fileLabel}: inventoryUpdatedAt`, catalog.inventoryUpdatedAt);
+
+  if (!Number.isInteger(catalog.totalCount) || catalog.totalCount < 0) {
+    errors.push(`${fileLabel}: totalCount must be a non-negative integer.`);
+  }
+
+  if (!isPlainObject(catalog.byCategory)) {
+    errors.push(`${fileLabel}: byCategory must be an object keyed by asset category.`);
+  }
+
+  if (!Array.isArray(catalog.assets)) {
+    errors.push(`${fileLabel}: assets must be an array.`);
+    return errors;
+  }
+
+  if (Number.isInteger(catalog.totalCount) && catalog.totalCount !== catalog.assets.length) {
+    errors.push(
+      `${fileLabel}: totalCount must equal assets.length (expected ${catalog.assets.length}, received ${catalog.totalCount}).`,
+    );
+  }
+
+  const computedByCategory = new Map();
+  for (const [index, asset] of catalog.assets.entries()) {
+    if (!isPlainObject(asset)) {
+      errors.push(`${fileLabel}: assets[${index}] must be an object.`);
+      continue;
+    }
+
+    requireString(errors, `${fileLabel}: assets[${index}].file`, asset.file);
+    requireString(errors, `${fileLabel}: assets[${index}].category`, asset.category);
+    requireString(errors, `${fileLabel}: assets[${index}].title`, asset.title);
+    requireString(errors, `${fileLabel}: assets[${index}].description`, asset.description);
+
+    if (typeof asset.category === 'string' && asset.category.trim() !== '') {
+      computedByCategory.set(asset.category, (computedByCategory.get(asset.category) ?? 0) + 1);
+    }
+  }
+
+  validateCountMap({
+    actualCounts: catalog.byCategory,
+    computedCounts: computedByCategory,
+    errors,
+    fileLabel,
+    mapName: 'byCategory',
+    itemLabel: 'assets with category',
+  });
+
+  if (publicPaths instanceof Set) {
+    errors.push(...validatePublicInventoryCoverage({
+      entries: catalog.assets,
+      fileLabel: `${fileLabel}: assets`,
+      governedPrefixes: ['/assets/generated/', '/assets/website/'],
+      publicPaths,
+    }));
+  }
+
+  return errors;
+}
+
+export function validatePublicInventoryCoverage({
+  entries,
+  fileLabel,
+  governedPrefixes,
+  publicPaths,
+}) {
+  const errors = [];
+  const inventoriedPaths = new Map();
+
+  for (const [index, entry] of entries.entries()) {
+    if (!isPlainObject(entry) || typeof entry.file !== 'string' || entry.file.trim() === '') continue;
+
+    const publicPath = `/${entry.file.replace(/^\/+/, '')}`;
+    const firstIndex = inventoriedPaths.get(publicPath);
+    if (firstIndex !== undefined) {
+      errors.push(`${fileLabel}[${index}].file duplicates ${publicPath}, first listed at index ${firstIndex}.`);
+      continue;
+    }
+    inventoriedPaths.set(publicPath, index);
+
+    if (!governedPrefixes.some((prefix) => publicPath.startsWith(prefix))) {
+      errors.push(`${fileLabel}[${index}].file is outside the governed public directories: ${publicPath}.`);
+      continue;
+    }
+
+    if (!publicPaths.has(publicPath)) {
+      errors.push(`${fileLabel}[${index}].file points to a missing public file: ${publicPath}.`);
+    }
+  }
+
+  const governedPublicPaths = [...publicPaths]
+    .filter((publicPath) => governedPrefixes.some((prefix) => publicPath.startsWith(prefix)))
+    .sort();
+  for (const publicPath of governedPublicPaths) {
+    if (!inventoriedPaths.has(publicPath)) {
+      errors.push(`${fileLabel} does not inventory public file: ${publicPath}.`);
     }
   }
 
@@ -271,7 +386,7 @@ export async function readTextFile(filePath) {
   return fs.readFile(filePath, 'utf8');
 }
 
-export function validateSiteData(siteData, { knownRoutes, publicPaths }) {
+export function validateSiteData(siteData, { knownRoutes, publicPaths, inventoryCounts = {} }) {
   const errors = [];
   const fileLabel = 'src/data/site-data.json';
 
@@ -302,6 +417,10 @@ export function validateSiteData(siteData, { knownRoutes, publicPaths }) {
   validateNotebookHighlights(errors, `${fileLabel}: notebooklmHighlights`, siteData.notebooklmHighlights, knownRoutes, publicPaths);
   validatePalette(errors, `${fileLabel}: palette`, siteData.palette);
   validateTypography(errors, `${fileLabel}: typography`, siteData.typography);
+
+  for (const [metricLabel, expectedCount] of Object.entries(inventoryCounts)) {
+    validateInventoryMetric(errors, `${fileLabel}: metrics`, siteData.metrics, metricLabel, expectedCount);
+  }
 
   validateInternalReference(errors, `${fileLabel}: docsHomeHref`, siteData.docsHomeHref, knownRoutes, publicPaths);
   validateInternalReference(errors, `${fileLabel}: heroPrimaryHref`, siteData.heroPrimaryHref, knownRoutes, publicPaths);
@@ -376,6 +495,41 @@ function validateLabeledPairs(errors, label, value) {
     requireString(errors, `${label}[${index}].label`, entry.label);
     requireString(errors, `${label}[${index}].value`, entry.value);
   });
+}
+
+function validateInventoryMetric(errors, label, metrics, metricLabel, expectedCount) {
+  if (!Array.isArray(metrics)) return;
+
+  const matchingMetrics = metrics.filter((metric) => isPlainObject(metric) && metric.label === metricLabel);
+  if (matchingMetrics.length !== 1) {
+    errors.push(`${label} must contain exactly one "${metricLabel}" entry.`);
+    return;
+  }
+
+  const received = matchingMetrics[0].value;
+  if (received !== String(expectedCount)) {
+    errors.push(`${label} entry "${metricLabel}" must equal inventory count ${expectedCount}, received ${JSON.stringify(received)}.`);
+  }
+}
+
+function validateCountMap({ actualCounts, computedCounts, errors, fileLabel, mapName, itemLabel }) {
+  if (!isPlainObject(actualCounts)) return;
+
+  const expectedKeys = new Set([...Object.keys(actualCounts), ...computedCounts.keys()]);
+  for (const key of [...expectedKeys].sort()) {
+    const received = actualCounts[key];
+    if (!Number.isInteger(received) || received < 0) {
+      errors.push(`${fileLabel}: ${mapName}.${key} must be a non-negative integer.`);
+      continue;
+    }
+
+    const expected = computedCounts.get(key) ?? 0;
+    if (received !== expected) {
+      errors.push(
+        `${fileLabel}: ${mapName}.${key} must equal the number of ${itemLabel} "${key}" (expected ${expected}, received ${received}).`,
+      );
+    }
+  }
 }
 
 function validateFeatureCards(errors, label, value, knownRoutes, publicPaths) {

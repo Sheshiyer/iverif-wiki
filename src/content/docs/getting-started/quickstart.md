@@ -28,25 +28,25 @@ Use this page to find the latest launch outputs quickly.
 
 ## NotebookLM Coverage
 
-- **Reports:** 3 PDF brand reports
-- **Mind Maps:** 4 ecosystem and positioning mind maps
-- **Decks:** 2 brand decks + 3 slide decks
-- **Audio briefings:** 1 brand audio overview
-- **Data assets:** 2 CSV data tables + 1 source collection JSON
+- **Reports:** 3 markdown reports
+- **Decks:** 4 PDF decks
+- **Infographics:** 3 PNG exports
+- **Audio briefings:** 3 MP3 exports
+- **Mind maps:** 2 JSON exports
+- **Flashcards and quizzes:** 4 JSON study assets
+- **Tables and videos:** 3 CSV tables and 2 MP4 exports
 
-## Visual Assets Generated
+## Visual Asset Inventory
 
-16 original assets via GPT Image 2:
+21 generated and curated image files:
 - Bento grid compositions
 - Brand seal and logo emboss
 - App icon and OG image
 - Twitter header and pitch hero
 - Email hero and website header
-- Brand portrait and lifestyle shots
-- Icon grid and mood board
-- Logo watermark and vector grid
-- Pattern library and web components
+- Compass specification reference
+- Curated website social and favicon assets
 
 ---
 
-*All assets are original creations for iverif.io via Brandmint pipeline.*
+*Counts reflect the repository-tracked inventories validated against the public files.*

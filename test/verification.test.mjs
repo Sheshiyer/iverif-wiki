@@ -7,6 +7,7 @@ import path from 'node:path';
 import {
   buildExpectedRouteManifest,
   collectMarkdownReferences,
+  collectRepositoryContracts,
   deriveStaticLocalizedDocRoutes,
   distCandidatesForRoute,
   filePathToDocSlug,
@@ -15,6 +16,7 @@ import {
   readJsonFile,
   validateArtifactsCatalog,
   validateSiteData,
+  validateVisualAssetsCatalog,
 } from '../scripts/lib/verification-core.mjs';
 
 test('parseLocalesFromI18nSource returns declared locales', () => {
@@ -114,7 +116,12 @@ test('validateArtifactsCatalog reports totalCount and byType mismatches', () => 
     generatedAt: '2026-06-03T22:28:32.664326',
     totalCount: 2,
     byType: { Audio: 2 },
-    artifacts: [{ kind: 'Audio' }],
+    artifacts: [{
+      file: 'notebooklm/audio.mp3',
+      kind: 'Audio',
+      title: 'Audio',
+      description: 'Audio export.',
+    }],
   });
 
   assert.deepEqual(errors, [
@@ -164,4 +171,95 @@ test('distCandidatesForRoute supports directory and file-style Astro output', ()
       path.join('/repo/dist', 'en', 'docs', 'index.html'),
     ],
   );
+});
+
+test('repository inventories exactly cover governed public files and metrics', async () => {
+  const rootDir = process.cwd();
+  const contracts = await collectRepositoryContracts(rootDir);
+  const artifactsCatalog = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'artifacts.json'),
+    'src/data/artifacts.json',
+  );
+  const visualAssetsCatalog = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'visual-assets.json'),
+    'src/data/visual-assets.json',
+  );
+  const siteData = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'site-data.json'),
+    'src/data/site-data.json',
+  );
+
+  assert.equal(artifactsCatalog.totalCount, 24);
+  assert.equal(artifactsCatalog.artifacts.length, 24);
+  assert.equal(visualAssetsCatalog.totalCount, 21);
+  assert.equal(visualAssetsCatalog.assets.length, 21);
+  assert.deepEqual(
+    validateArtifactsCatalog(artifactsCatalog, 'src/data/artifacts.json', contracts.publicPaths),
+    [],
+  );
+  assert.deepEqual(validateVisualAssetsCatalog(visualAssetsCatalog, contracts.publicPaths), []);
+  assert.deepEqual(validateSiteData(siteData, {
+    ...contracts,
+    inventoryCounts: {
+      'NotebookLM artifacts': 24,
+      'Visual assets': 21,
+    },
+  }), []);
+});
+
+test('inventory validation rejects unlisted, duplicate, and metric drift', async () => {
+  const rootDir = process.cwd();
+  const contracts = await collectRepositoryContracts(rootDir);
+  const artifactsCatalog = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'artifacts.json'),
+    'src/data/artifacts.json',
+  );
+  const visualAssetsCatalog = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'visual-assets.json'),
+    'src/data/visual-assets.json',
+  );
+  const siteData = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'site-data.json'),
+    'src/data/site-data.json',
+  );
+
+  const missingArtifactCatalog = {
+    ...artifactsCatalog,
+    artifacts: artifactsCatalog.artifacts.slice(1),
+  };
+  const missingArtifactErrors = validateArtifactsCatalog(
+    missingArtifactCatalog,
+    'src/data/artifacts.json',
+    contracts.publicPaths,
+  );
+  assert.ok(missingArtifactErrors.some((error) => error.includes(
+    'does not inventory public file: /notebooklm/audio-brief-short.mp3',
+  )));
+
+  const duplicateVisualCatalog = {
+    ...visualAssetsCatalog,
+    totalCount: visualAssetsCatalog.totalCount + 1,
+    assets: [...visualAssetsCatalog.assets, visualAssetsCatalog.assets[0]],
+  };
+  const duplicateVisualErrors = validateVisualAssetsCatalog(duplicateVisualCatalog, contracts.publicPaths);
+  assert.ok(duplicateVisualErrors.some((error) => error.includes(
+    'duplicates /assets/generated/09-capture-compass-spec.png',
+  )));
+
+  const driftedSiteData = {
+    ...siteData,
+    metrics: siteData.metrics.map((metric) => (
+      metric.label === 'Visual assets' ? { ...metric, value: '20' } : metric
+    )),
+  };
+  const metricErrors = validateSiteData(driftedSiteData, {
+    ...contracts,
+    inventoryCounts: {
+      'NotebookLM artifacts': 24,
+      'Visual assets': 21,
+    },
+  });
+  assert.ok(metricErrors.includes(
+    'src/data/site-data.json: metrics entry "Visual assets" must equal inventory count 21, received "20".',
+  ));
 });

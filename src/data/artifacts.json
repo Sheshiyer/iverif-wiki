@@ -1,7 +1,162 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "generatedAt": "2026-06-03T22:28:32.664326",
-  "totalCount": 0,
-  "byType": {},
-  "artifacts": []
+  "totalCount": 24,
+  "byType": {
+    "Audio": 3,
+    "Deck": 4,
+    "Flashcards": 2,
+    "Infographic": 3,
+    "Mind Map": 2,
+    "Quiz": 2,
+    "Report": 3,
+    "Table": 3,
+    "Video": 2
+  },
+  "artifacts": [
+    {
+      "file": "notebooklm/audio-brief-short.mp3",
+      "kind": "Audio",
+      "title": "Brief Audio Overview",
+      "description": "Short audio overview exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/audio-debate.mp3",
+      "kind": "Audio",
+      "title": "Debate Audio Overview",
+      "description": "Multi-speaker audio discussion exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/audio-deep-dive-long.mp3",
+      "kind": "Audio",
+      "title": "Deep Dive Audio Overview",
+      "description": "Long-form audio overview exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/deck-detailed-full.pdf",
+      "kind": "Deck",
+      "title": "Detailed Deck Full",
+      "description": "Full PDF deck exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/deck-detailed-short.pdf",
+      "kind": "Deck",
+      "title": "Detailed Deck Short",
+      "description": "Short PDF deck exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/deck-presenter-full.pdf",
+      "kind": "Deck",
+      "title": "Presenter Deck Full",
+      "description": "Full presenter PDF deck exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/deck-presenter-short.pdf",
+      "kind": "Deck",
+      "title": "Presenter Deck Short",
+      "description": "Short presenter PDF deck exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/flashcards-detailed.json",
+      "kind": "Flashcards",
+      "title": "Detailed Flashcards",
+      "description": "Detailed flashcard set exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/flashcards-standard.json",
+      "kind": "Flashcards",
+      "title": "Standard Flashcards",
+      "description": "Standard flashcard set exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/infographic-landscape.png",
+      "kind": "Infographic",
+      "title": "Landscape Infographic",
+      "description": "Landscape infographic exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/infographic-portrait.png",
+      "kind": "Infographic",
+      "title": "Portrait Infographic",
+      "description": "Portrait infographic exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/infographic-square.png",
+      "kind": "Infographic",
+      "title": "Square Infographic",
+      "description": "Square infographic exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/mind-map (2).json",
+      "kind": "Mind Map",
+      "title": "Mind Map Extended",
+      "description": "Extended mind map export from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/mind-map.json",
+      "kind": "Mind Map",
+      "title": "Mind Map Core",
+      "description": "Core mind map export from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/quiz-hard.json",
+      "kind": "Quiz",
+      "title": "Hard Quiz",
+      "description": "Hard quiz export from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/quiz-medium.json",
+      "kind": "Quiz",
+      "title": "Medium Quiz",
+      "description": "Medium quiz export from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/report-blog.md",
+      "kind": "Report",
+      "title": "Blog Report",
+      "description": "Markdown report exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/report-briefing.md",
+      "kind": "Report",
+      "title": "Briefing Report",
+      "description": "Briefing markdown report exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/report-study-guide.md",
+      "kind": "Report",
+      "title": "Study Guide Report",
+      "description": "Study guide markdown report exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/table-competitive.csv",
+      "kind": "Table",
+      "title": "Competitive Table",
+      "description": "Competitive CSV table exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/table-persona.csv",
+      "kind": "Table",
+      "title": "Persona Table",
+      "description": "Persona CSV table exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/table-product.csv",
+      "kind": "Table",
+      "title": "Product Table",
+      "description": "Product CSV table exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/video-brief.mp4",
+      "kind": "Video",
+      "title": "Brief Video Overview",
+      "description": "Short video overview exported from the NotebookLM workspace."
+    },
+    {
+      "file": "notebooklm/video-explainer.mp4",
+      "kind": "Video",
+      "title": "Explainer Video Overview",
+      "description": "Explainer video export from the NotebookLM workspace."
+    }
+  ]
 }

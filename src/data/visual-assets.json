@@ -1,0 +1,140 @@
+{
+  "version": "1.0.0",
+  "inventoryUpdatedAt": "2026-08-16",
+  "totalCount": 21,
+  "byCategory": {
+    "App & Web": 8,
+    "Brand Identity": 6,
+    "Campaign": 2,
+    "Specifications": 1,
+    "Website Curated": 4
+  },
+  "assets": [
+    {
+      "file": "assets/generated/09-capture-compass-spec.png",
+      "category": "Specifications",
+      "title": "Capture Compass Spec",
+      "description": "Specification image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/2A-brand-kit-bento-nanobananapro-v1.png",
+      "category": "Brand Identity",
+      "title": "Brand Kit Bento v1",
+      "description": "Brand kit bento image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/2A-brand-kit-bento-nanobananapro-v137.png",
+      "category": "Brand Identity",
+      "title": "Brand Kit Bento v137",
+      "description": "Updated brand kit bento image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/2B-brand-seal-flux2pro-v1.png",
+      "category": "Brand Identity",
+      "title": "Brand Seal v1",
+      "description": "Brand seal image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/2B-brand-seal-flux2pro-v137.png",
+      "category": "Brand Identity",
+      "title": "Brand Seal v137",
+      "description": "Updated brand seal image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/2C-logo-emboss-flux2pro-v1.png",
+      "category": "Brand Identity",
+      "title": "Logo Emboss v1",
+      "description": "Logo emboss image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/2C-logo-emboss-flux2pro-v137.png",
+      "category": "Brand Identity",
+      "title": "Logo Emboss v137",
+      "description": "Updated logo emboss image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/APP-ICON-app_icon-flux2pro-v1.png",
+      "category": "App & Web",
+      "title": "App Icon v1",
+      "description": "Application icon image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/APP-ICON-app_icon-flux2pro-v137.png",
+      "category": "App & Web",
+      "title": "App Icon v137",
+      "description": "Updated application icon image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/EMAIL-HERO-email_hero-nanobananapro-v1.png",
+      "category": "Campaign",
+      "title": "Email Hero v1",
+      "description": "Email hero image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/EMAIL-HERO-email_hero-nanobananapro-v137.png",
+      "category": "Campaign",
+      "title": "Email Hero v137",
+      "description": "Updated email hero image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/OG-IMAGE-og_image-nanobananapro-v1.png",
+      "category": "App & Web",
+      "title": "OG Image v1",
+      "description": "Open graph image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/OG-IMAGE-og_image-nanobananapro-v137.png",
+      "category": "App & Web",
+      "title": "OG Image v137",
+      "description": "Updated open graph image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/PITCH-HERO-pitch_hero-nanobananapro-v1.png",
+      "category": "App & Web",
+      "title": "Pitch Hero v1",
+      "description": "Pitch hero image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/PITCH-HERO-pitch_hero-nanobananapro-v137.png",
+      "category": "App & Web",
+      "title": "Pitch Hero v137",
+      "description": "Updated pitch hero image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/TWITTER-HEADER-twitter_header-nanobananapro-v1.png",
+      "category": "App & Web",
+      "title": "Twitter Header v1",
+      "description": "Social header image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/generated/TWITTER-HEADER-twitter_header-nanobananapro-v137.png",
+      "category": "App & Web",
+      "title": "Twitter Header v137",
+      "description": "Updated social header image stored in the generated asset inventory."
+    },
+    {
+      "file": "assets/website/favicon.png",
+      "category": "Website Curated",
+      "title": "Website Favicon",
+      "description": "Website favicon stored in the curated asset inventory."
+    },
+    {
+      "file": "assets/website/og-image.png",
+      "category": "Website Curated",
+      "title": "Website OG Image",
+      "description": "Website open graph image stored in the curated asset inventory."
+    },
+    {
+      "file": "assets/website/pitch-hero.png",
+      "category": "Website Curated",
+      "title": "Website Pitch Hero",
+      "description": "Website pitch hero image stored in the curated asset inventory."
+    },
+    {
+      "file": "assets/website/twitter-header.png",
+      "category": "Website Curated",
+      "title": "Website Twitter Header",
+      "description": "Website social header image stored in the curated asset inventory."
+    }
+  ]
+}

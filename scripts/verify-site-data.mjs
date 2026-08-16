@@ -6,6 +6,7 @@ import {
   validateArtifactsCatalog,
   validateMarkdownContent,
   validateSiteData,
+  validateVisualAssetsCatalog,
 } from './lib/verification-core.mjs';
 
 async function main() {
@@ -19,10 +20,21 @@ async function main() {
     path.join(rootDir, 'src', 'data', 'artifacts.json'),
     'src/data/artifacts.json',
   );
+  const visualAssetsCatalog = await readJsonFile(
+    path.join(rootDir, 'src', 'data', 'visual-assets.json'),
+    'src/data/visual-assets.json',
+  );
 
   const errors = [
-    ...validateSiteData(siteData, contracts),
-    ...validateArtifactsCatalog(artifactsCatalog),
+    ...validateSiteData(siteData, {
+      ...contracts,
+      inventoryCounts: {
+        'NotebookLM artifacts': artifactsCatalog.totalCount,
+        'Visual assets': visualAssetsCatalog.totalCount,
+      },
+    }),
+    ...validateArtifactsCatalog(artifactsCatalog, 'src/data/artifacts.json', contracts.publicPaths),
+    ...validateVisualAssetsCatalog(visualAssetsCatalog, contracts.publicPaths),
     ...await validateMarkdownContent(rootDir, contracts.markdownFiles, contracts),
   ];
 
@@ -44,7 +56,7 @@ async function main() {
   }
 
   console.log(
-    `verify:data passed: ${contracts.docSlugs.length} docs, ${contracts.locales.length} locale(s), ${contracts.publicPaths.size} public file(s), ${contracts.markdownFiles.length} markdown file(s).`,
+    `verify:data passed: ${contracts.docSlugs.length} docs, ${contracts.locales.length} locale(s), ${artifactsCatalog.totalCount} NotebookLM artifacts, ${visualAssetsCatalog.totalCount} visual assets, ${contracts.publicPaths.size} public file(s), ${contracts.markdownFiles.length} markdown file(s).`,
   );
 }
 

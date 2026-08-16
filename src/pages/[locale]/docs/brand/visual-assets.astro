@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import visualAssetsCatalog from '../../../../data/visual-assets.json';
 import { LOCALES, normalizeLocale } from '../../../../i18n';
 
 export async function getStaticPaths() {
@@ -7,41 +8,13 @@ export async function getStaticPaths() {
 }
 
 const locale = normalizeLocale(Astro.params.locale);
-
-// Real files only from public/assets/generated and /website
-const visualAssets = [
-  // Brand Identity
-  { file: '/assets/generated/2A-brand-kit-bento-nanobananapro-v1.png', cat: 'Brand Identity', title: 'Brand Kit Bento Grid (v1)', desc: 'Foundational bento establishing precision, signal green, regulatory stone.' },
-  { file: '/assets/generated/2A-brand-kit-bento-nanobananapro-v137.png', cat: 'Brand Identity', title: 'Brand Kit Bento Grid (v137)', desc: 'Refined iteration of the core brand bento system.' },
-  { file: '/assets/generated/2B-brand-seal-flux2pro-v1.png', cat: 'Brand Identity', title: 'Brand Seal (v1)', desc: 'Document icon with integrated validation checkmark — the mark of trusted AI.' },
-  { file: '/assets/generated/2B-brand-seal-flux2pro-v137.png', cat: 'Brand Identity', title: 'Brand Seal (v137)', desc: 'Polished seal variant for premium applications.' },
-  { file: '/assets/generated/2C-logo-emboss-flux2pro-v1.png', cat: 'Brand Identity', title: 'Logo Emboss (v1)', desc: 'Dimensional emboss treatment for depth and authority.' },
-  { file: '/assets/generated/2C-logo-emboss-flux2pro-v137.png', cat: 'Brand Identity', title: 'Logo Emboss (v137)', desc: 'Enhanced emboss with refined lighting.' },
-  // App & Web
-  { file: '/assets/generated/APP-ICON-app_icon-flux2pro-v1.png', cat: 'App & Web', title: 'App Icon (v1)', desc: 'iOS/Android/favicon app icon.' },
-  { file: '/assets/generated/APP-ICON-app_icon-flux2pro-v137.png', cat: 'App & Web', title: 'App Icon (v137)', desc: 'Refined app icon variant.' },
-  { file: '/assets/generated/OG-IMAGE-og_image-nanobananapro-v1.png', cat: 'App & Web', title: 'OG Image (v1)', desc: 'Social sharing preview 1200×630.' },
-  { file: '/assets/generated/OG-IMAGE-og_image-nanobananapro-v137.png', cat: 'App & Web', title: 'OG Image (v137)', desc: 'Updated OG for LinkedIn/X/FB.' },
-  { file: '/assets/generated/TWITTER-HEADER-twitter_header-nanobananapro-v1.png', cat: 'App & Web', title: 'Twitter/X Header (v1)', desc: 'Profile banner 1500×500.' },
-  { file: '/assets/generated/TWITTER-HEADER-twitter_header-nanobananapro-v137.png', cat: 'App & Web', title: 'Twitter/X Header (v137)', desc: 'Refined header banner.' },
-  { file: '/assets/generated/PITCH-HERO-pitch_hero-nanobananapro-v1.png', cat: 'App & Web', title: 'Pitch Deck Hero (v1)', desc: 'Investor deck hero 1920×1080.' },
-  { file: '/assets/generated/PITCH-HERO-pitch_hero-nanobananapro-v137.png', cat: 'App & Web', title: 'Pitch Deck Hero (v137)', desc: 'Updated pitch hero visual.' },
-  // Campaign
-  { file: '/assets/generated/EMAIL-HERO-email_hero-nanobananapro-v1.png', cat: 'Campaign', title: 'Email Hero (v1)', desc: 'Email campaign header image.' },
-  { file: '/assets/generated/EMAIL-HERO-email_hero-nanobananapro-v137.png', cat: 'Campaign', title: 'Email Hero (v137)', desc: 'Refined email hero.' },
-  // Website curated
-  { file: '/assets/website/og-image.png', cat: 'Website Curated', title: 'Website OG Image', desc: 'Production-ready 1200×630 for iverif.fr' },
-  { file: '/assets/website/twitter-header.png', cat: 'Website Curated', title: 'Website Twitter Header', desc: 'Production 1500×500 banner.' },
-  { file: '/assets/website/pitch-hero.png', cat: 'Website Curated', title: 'Website Pitch Hero', desc: 'Curated hero for decks and site.' },
-  { file: '/assets/website/favicon.png', cat: 'Website Curated', title: 'Favicon', desc: '512×512 production favicon.' },
-];
-
-const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
+const visualAssets = visualAssetsCatalog.assets;
+const cats = Array.from(new Set(visualAssets.map((asset) => asset.category))).sort();
 ---
 
 <BaseLayout 
   title="Visual Assets Library — iverif.io" 
-  description="Complete gallery of AI-generated brand assets: bento systems, seals, icons, OG images, pitch heroes, email assets, and production website files." 
+  description="Complete repository gallery of generated and curated visual assets, validated against the public file inventory."
   locale={locale}
 >
   <div class="doc-stage">
@@ -70,14 +43,14 @@ const cats = Array.from(new Set(visualAssets.map(a => a.cat))).sort();
         <!-- Non-3-col per refero: gallery capped at ~2-3 fluid but prefer media blocks; using auto-fill for density but constrained -->
         <div class="visual-gallery swiss-grid-4" id="va-gallery" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
           {visualAssets.map((a, idx) => (
-            <div class="swiss-panel visual-asset-card" data-cat={a.cat} data-idx={idx}>
-              <img src={a.file} alt={a.title} loading="lazy" style="width:100%; aspect-ratio: 16/10; object-fit:cover; border-radius:2px; border:1px solid var(--surface-border);" />
+            <div class="swiss-panel visual-asset-card" data-cat={a.category} data-idx={idx}>
+              <img src={`/${a.file}`} alt={a.title} loading="lazy" style="width:100%; aspect-ratio: 16/10; object-fit:cover; border-radius:2px; border:1px solid var(--surface-border);" />
               <div class="panel-body">
-                <p class="panel-eyebrow">{a.cat}</p>
+                <p class="panel-eyebrow">{a.category}</p>
                 <h3 style="font-size:0.9375rem;margin:4px 0 2px;">{a.title}</h3>
-                <p style="font-size:0.75rem;line-height:1.4;margin:0 0 8px;">{a.desc}</p>
+                <p style="font-size:0.75rem;line-height:1.4;margin:0 0 8px;">{a.description}</p>
                 <div style="display:flex;gap:0.5rem;">
-                  <a href={a.file} target="_blank" class="feature-link" style="font-size:0.75rem">Download</a>
+                  <a href={`/${a.file}`} target="_blank" class="feature-link" style="font-size:0.75rem">Download</a>
                   <button class="feature-link" style="font-size:0.75rem;background:none;border:none;padding:0;cursor:pointer" data-va-view={idx}>View</button>
                 </div>
               </div>
