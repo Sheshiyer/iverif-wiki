@@ -1,0 +1,16 @@
+{
+  "schema": "thoughtseed.local-jobs.v1",
+  "jobs": [
+    {
+      "id": "verify",
+      "argv": [
+        "bash",
+        ".local-jobs/verify.sh"
+      ],
+      "timeout_seconds": 900,
+      "enabled": false,
+      "daily": false,
+      "on_change": false
+    }
+  ]
+}
